@@ -30,213 +30,76 @@ namespace WinFormAction
         private void InitializeComponent()
         {
             this.group_box_mssql_server = new System.Windows.Forms.GroupBox();
-            this.group_box_mysql_server = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.button_Save_mssql_connector = new System.Windows.Forms.Button();
+            this.button_Connect_mssql = new System.Windows.Forms.Button();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox_password_mssql = new System.Windows.Forms.TextBox();
+            this.textBox_login_mssql = new System.Windows.Forms.TextBox();
+            this.comboBox_provider_mssql = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox_host_mssql = new System.Windows.Forms.ComboBox();
+            this.group_box_mysql_server = new System.Windows.Forms.GroupBox();
+            this.textBox_port_mysql = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.button_Save_mysql_connector = new System.Windows.Forms.Button();
+            this.button_Connect_mysql = new System.Windows.Forms.Button();
+            this.comboBox_database_mysql = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox_login_mysql = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.comboBox_host_mysql = new System.Windows.Forms.ComboBox();
+            this.textBox_password_mysql = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.button_next = new System.Windows.Forms.Button();
             this.group_box_mssql_server.SuspendLayout();
             this.group_box_mysql_server.SuspendLayout();
             this.SuspendLayout();
             // 
             // group_box_mssql_server
             // 
-            this.group_box_mssql_server.Controls.Add(this.button4);
-            this.group_box_mssql_server.Controls.Add(this.button2);
+            this.group_box_mssql_server.Controls.Add(this.button_Save_mssql_connector);
+            this.group_box_mssql_server.Controls.Add(this.button_Connect_mssql);
             this.group_box_mssql_server.Controls.Add(this.comboBox5);
             this.group_box_mssql_server.Controls.Add(this.label9);
             this.group_box_mssql_server.Controls.Add(this.label4);
             this.group_box_mssql_server.Controls.Add(this.label3);
-            this.group_box_mssql_server.Controls.Add(this.textBox2);
-            this.group_box_mssql_server.Controls.Add(this.textBox1);
-            this.group_box_mssql_server.Controls.Add(this.comboBox2);
+            this.group_box_mssql_server.Controls.Add(this.textBox_password_mssql);
+            this.group_box_mssql_server.Controls.Add(this.textBox_login_mssql);
+            this.group_box_mssql_server.Controls.Add(this.comboBox_provider_mssql);
             this.group_box_mssql_server.Controls.Add(this.label2);
             this.group_box_mssql_server.Controls.Add(this.label1);
-            this.group_box_mssql_server.Controls.Add(this.comboBox1);
-            this.group_box_mssql_server.Location = new System.Drawing.Point(6, 12);
+            this.group_box_mssql_server.Controls.Add(this.comboBox_host_mssql);
+            this.group_box_mssql_server.Location = new System.Drawing.Point(232, 12);
             this.group_box_mssql_server.Name = "group_box_mssql_server";
             this.group_box_mssql_server.Size = new System.Drawing.Size(224, 231);
             this.group_box_mssql_server.TabIndex = 0;
             this.group_box_mssql_server.TabStop = false;
             this.group_box_mssql_server.Text = "MSSQL Server";
             // 
-            // group_box_mysql_server
+            // button_Save_mssql_connector
             // 
-            this.group_box_mysql_server.Controls.Add(this.button3);
-            this.group_box_mysql_server.Controls.Add(this.button1);
-            this.group_box_mysql_server.Controls.Add(this.comboBox6);
-            this.group_box_mysql_server.Controls.Add(this.label10);
-            this.group_box_mysql_server.Controls.Add(this.label5);
-            this.group_box_mysql_server.Controls.Add(this.textBox4);
-            this.group_box_mysql_server.Controls.Add(this.label6);
-            this.group_box_mysql_server.Controls.Add(this.comboBox4);
-            this.group_box_mysql_server.Controls.Add(this.textBox3);
-            this.group_box_mysql_server.Controls.Add(this.label8);
-            this.group_box_mysql_server.Controls.Add(this.label7);
-            this.group_box_mysql_server.Controls.Add(this.comboBox3);
-            this.group_box_mysql_server.Location = new System.Drawing.Point(236, 12);
-            this.group_box_mysql_server.Name = "group_box_mysql_server";
-            this.group_box_mysql_server.Size = new System.Drawing.Size(218, 231);
-            this.group_box_mysql_server.TabIndex = 1;
-            this.group_box_mysql_server.TabStop = false;
-            this.group_box_mysql_server.Text = "MySQL Server";
+            this.button_Save_mssql_connector.Location = new System.Drawing.Point(142, 199);
+            this.button_Save_mssql_connector.Name = "button_Save_mssql_connector";
+            this.button_Save_mssql_connector.Size = new System.Drawing.Size(75, 23);
+            this.button_Save_mssql_connector.TabIndex = 18;
+            this.button_Save_mssql_connector.Text = "Save";
+            this.button_Save_mssql_connector.UseVisualStyleBackColor = true;
+            this.button_Save_mssql_connector.Click += new System.EventHandler(this.button_Save_mssql_connector_Click);
             // 
-            // comboBox1
+            // button_Connect_mssql
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(80, 20);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(137, 23);
-            this.comboBox1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Host:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 56);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Provider:";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(80, 53);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(137, 23);
-            this.comboBox2.TabIndex = 4;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(80, 83);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(137, 23);
-            this.textBox1.TabIndex = 5;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(80, 112);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(137, 23);
-            this.textBox2.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 86);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 15);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "login:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 115);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 15);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Password:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 115);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 15);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Password:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(26, 86);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(37, 15);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "login:";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(78, 112);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.PasswordChar = '*';
-            this.textBox3.Size = new System.Drawing.Size(137, 23);
-            this.textBox3.TabIndex = 14;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(78, 83);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(137, 23);
-            this.textBox4.TabIndex = 13;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(78, 53);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(137, 23);
-            this.comboBox3.TabIndex = 12;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 56);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(54, 15);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Provider:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(28, 23);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(35, 15);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "Host:";
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(78, 20);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(137, 23);
-            this.comboBox4.TabIndex = 9;
+            this.button_Connect_mssql.Location = new System.Drawing.Point(142, 141);
+            this.button_Connect_mssql.Name = "button_Connect_mssql";
+            this.button_Connect_mssql.Size = new System.Drawing.Size(75, 23);
+            this.button_Connect_mssql.TabIndex = 17;
+            this.button_Connect_mssql.Text = "Connect";
+            this.button_Connect_mssql.UseVisualStyleBackColor = true;
+            this.button_Connect_mssql.Click += new System.EventHandler(this.button_Connect_mssql_Click);
             // 
             // comboBox5
             // 
@@ -256,15 +119,143 @@ namespace WinFormAction
             this.label9.TabIndex = 9;
             this.label9.Text = "Database:";
             // 
-            // comboBox6
+            // label4
             // 
-            this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(81, 170);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(137, 23);
-            this.comboBox6.TabIndex = 12;
-            this.comboBox6.SelectedIndexChanged += new System.EventHandler(this.comboBox6_SelectedIndexChanged);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(5, 115);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(60, 15);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Password:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(28, 86);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 15);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "login:";
+            // 
+            // textBox_password_mssql
+            // 
+            this.textBox_password_mssql.Location = new System.Drawing.Point(80, 112);
+            this.textBox_password_mssql.Name = "textBox_password_mssql";
+            this.textBox_password_mssql.PasswordChar = '*';
+            this.textBox_password_mssql.Size = new System.Drawing.Size(137, 23);
+            this.textBox_password_mssql.TabIndex = 6;
+            // 
+            // textBox_login_mssql
+            // 
+            this.textBox_login_mssql.Location = new System.Drawing.Point(80, 83);
+            this.textBox_login_mssql.Name = "textBox_login_mssql";
+            this.textBox_login_mssql.Size = new System.Drawing.Size(137, 23);
+            this.textBox_login_mssql.TabIndex = 5;
+            // 
+            // comboBox_provider_mssql
+            // 
+            this.comboBox_provider_mssql.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_provider_mssql.FormattingEnabled = true;
+            this.comboBox_provider_mssql.Location = new System.Drawing.Point(80, 53);
+            this.comboBox_provider_mssql.Name = "comboBox_provider_mssql";
+            this.comboBox_provider_mssql.Size = new System.Drawing.Size(137, 23);
+            this.comboBox_provider_mssql.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(11, 56);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 15);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Provider:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(30, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 15);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Host:";
+            // 
+            // comboBox_host_mssql
+            // 
+            this.comboBox_host_mssql.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.comboBox_host_mssql.FormattingEnabled = true;
+            this.comboBox_host_mssql.Location = new System.Drawing.Point(80, 20);
+            this.comboBox_host_mssql.Name = "comboBox_host_mssql";
+            this.comboBox_host_mssql.Size = new System.Drawing.Size(137, 23);
+            this.comboBox_host_mssql.TabIndex = 0;
+            // 
+            // group_box_mysql_server
+            // 
+            this.group_box_mysql_server.Controls.Add(this.textBox_port_mysql);
+            this.group_box_mysql_server.Controls.Add(this.label11);
+            this.group_box_mysql_server.Controls.Add(this.button_Save_mysql_connector);
+            this.group_box_mysql_server.Controls.Add(this.button_Connect_mysql);
+            this.group_box_mysql_server.Controls.Add(this.comboBox_database_mysql);
+            this.group_box_mysql_server.Controls.Add(this.label10);
+            this.group_box_mysql_server.Controls.Add(this.label5);
+            this.group_box_mysql_server.Controls.Add(this.textBox_login_mysql);
+            this.group_box_mysql_server.Controls.Add(this.label6);
+            this.group_box_mysql_server.Controls.Add(this.comboBox_host_mysql);
+            this.group_box_mysql_server.Controls.Add(this.textBox_password_mysql);
+            this.group_box_mysql_server.Controls.Add(this.label8);
+            this.group_box_mysql_server.Location = new System.Drawing.Point(8, 12);
+            this.group_box_mysql_server.Name = "group_box_mysql_server";
+            this.group_box_mysql_server.Size = new System.Drawing.Size(218, 231);
+            this.group_box_mysql_server.TabIndex = 1;
+            this.group_box_mysql_server.TabStop = false;
+            this.group_box_mysql_server.Text = "MySQL Server";
+            // 
+            // textBox_port_mysql
+            // 
+            this.textBox_port_mysql.Location = new System.Drawing.Point(78, 52);
+            this.textBox_port_mysql.Name = "textBox_port_mysql";
+            this.textBox_port_mysql.Size = new System.Drawing.Size(137, 23);
+            this.textBox_port_mysql.TabIndex = 18;
+            this.textBox_port_mysql.Text = "3306";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(28, 56);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(32, 15);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "port:";
+            // 
+            // button_Save_mysql_connector
+            // 
+            this.button_Save_mysql_connector.Location = new System.Drawing.Point(137, 199);
+            this.button_Save_mysql_connector.Name = "button_Save_mysql_connector";
+            this.button_Save_mysql_connector.Size = new System.Drawing.Size(75, 23);
+            this.button_Save_mysql_connector.TabIndex = 17;
+            this.button_Save_mysql_connector.Text = "Save";
+            this.button_Save_mysql_connector.UseVisualStyleBackColor = true;
+            this.button_Save_mysql_connector.Click += new System.EventHandler(this.button_Save_mysql_connector_Click);
+            // 
+            // button_Connect_mysql
+            // 
+            this.button_Connect_mysql.Location = new System.Drawing.Point(137, 141);
+            this.button_Connect_mysql.Name = "button_Connect_mysql";
+            this.button_Connect_mysql.Size = new System.Drawing.Size(75, 23);
+            this.button_Connect_mysql.TabIndex = 11;
+            this.button_Connect_mysql.Text = "Connect";
+            this.button_Connect_mysql.UseVisualStyleBackColor = true;
+            this.button_Connect_mysql.Click += new System.EventHandler(this.button_Connect_mysql_Click);
+            // 
+            // comboBox_database_mysql
+            // 
+            this.comboBox_database_mysql.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_database_mysql.ForeColor = System.Drawing.SystemColors.Window;
+            this.comboBox_database_mysql.FormattingEnabled = true;
+            this.comboBox_database_mysql.Location = new System.Drawing.Point(81, 170);
+            this.comboBox_database_mysql.Name = "comboBox_database_mysql";
+            this.comboBox_database_mysql.Size = new System.Drawing.Size(137, 23);
+            this.comboBox_database_mysql.TabIndex = 12;
+            this.comboBox_database_mysql.SelectedIndexChanged += new System.EventHandler(this.comboBox6_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -276,61 +267,77 @@ namespace WinFormAction
             this.label10.Text = "Database:";
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
-            // button1
+            // label5
             // 
-            this.button1.Location = new System.Drawing.Point(137, 141);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Connect";
-            this.button1.UseVisualStyleBackColor = true;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 115);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 15);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Password:";
             // 
-            // button2
+            // textBox_login_mysql
             // 
-            this.button2.Location = new System.Drawing.Point(142, 141);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "Connect";
-            this.button2.UseVisualStyleBackColor = true;
+            this.textBox_login_mysql.Location = new System.Drawing.Point(78, 83);
+            this.textBox_login_mysql.Name = "textBox_login_mysql";
+            this.textBox_login_mysql.Size = new System.Drawing.Size(137, 23);
+            this.textBox_login_mysql.TabIndex = 13;
             // 
-            // button3
+            // label6
             // 
-            this.button3.Location = new System.Drawing.Point(137, 199);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 17;
-            this.button3.Text = "Save";
-            this.button3.UseVisualStyleBackColor = true;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(26, 86);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(37, 15);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "login:";
             // 
-            // button4
+            // comboBox_host_mysql
             // 
-            this.button4.Location = new System.Drawing.Point(142, 199);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 18;
-            this.button4.Text = "Save";
-            this.button4.UseVisualStyleBackColor = true;
+            this.comboBox_host_mysql.FormattingEnabled = true;
+            this.comboBox_host_mysql.Location = new System.Drawing.Point(78, 20);
+            this.comboBox_host_mysql.Name = "comboBox_host_mysql";
+            this.comboBox_host_mysql.Size = new System.Drawing.Size(137, 23);
+            this.comboBox_host_mysql.TabIndex = 9;
             // 
-            // button5
+            // textBox_password_mysql
             // 
-            this.button5.Location = new System.Drawing.Point(376, 249);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "Next ->";
-            this.button5.UseVisualStyleBackColor = true;
+            this.textBox_password_mysql.Location = new System.Drawing.Point(78, 112);
+            this.textBox_password_mysql.Name = "textBox_password_mysql";
+            this.textBox_password_mysql.PasswordChar = '*';
+            this.textBox_password_mysql.Size = new System.Drawing.Size(137, 23);
+            this.textBox_password_mysql.TabIndex = 14;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(28, 23);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 15);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Host:";
+            // 
+            // button_next
+            // 
+            this.button_next.Location = new System.Drawing.Point(376, 249);
+            this.button_next.Name = "button_next";
+            this.button_next.Size = new System.Drawing.Size(75, 23);
+            this.button_next.TabIndex = 2;
+            this.button_next.Text = "Next ->";
+            this.button_next.UseVisualStyleBackColor = true;
+            this.button_next.Click += new System.EventHandler(this.button_next_Click);
             // 
             // firstauth
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(463, 278);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button_next);
             this.Controls.Add(this.group_box_mysql_server);
             this.Controls.Add(this.group_box_mssql_server);
             this.Name = "firstauth";
             this.Text = "Первичная настройка";
+            this.Load += new System.EventHandler(this.firstauth_Load);
             this.group_box_mssql_server.ResumeLayout(false);
             this.group_box_mssql_server.PerformLayout();
             this.group_box_mysql_server.ResumeLayout(false);
@@ -345,30 +352,37 @@ namespace WinFormAction
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox group_box_mysql_server;
         private System.Windows.Forms.GroupBox group_box_mssql_server;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button_Connect_mssql;
         private System.Windows.Forms.ComboBox comboBox5;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox_provider_mssql;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.ComboBox comboBox_host_mssql;
+        private System.Windows.Forms.Button button_Connect_mysql;
+        private System.Windows.Forms.ComboBox comboBox_database_mysql;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox_login_mysql;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button button_Save_mssql_connector;
+        private System.Windows.Forms.Button button_Save_mysql_connector;
+        private System.Windows.Forms.Button button_next;
+        private System.Windows.Forms.ComboBox comboBox_host_mysql;
+        private System.Windows.Forms.ComboBox comboBox_provider_mysql;
+        private System.Windows.Forms.TextBox textBox_password_mysql;
+        private System.Windows.Forms.TextBox textBox_login_mssql;
+        private System.Windows.Forms.TextBox textBox_password_mssql;
+        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox textBox_port_mysql;
+        private System.Windows.Forms.Label label11;
     }
 }
