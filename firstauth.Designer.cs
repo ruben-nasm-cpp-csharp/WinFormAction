@@ -54,6 +54,8 @@ namespace WinFormAction
             this.textBox_password_mysql = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.button_next = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button_create_database_mysql = new System.Windows.Forms.Button();
             this.group_box_mssql_server.SuspendLayout();
             this.group_box_mysql_server.SuspendLayout();
             this.SuspendLayout();
@@ -168,6 +170,8 @@ namespace WinFormAction
             // 
             // group_box_mysql_server
             // 
+            this.group_box_mysql_server.Controls.Add(this.button_create_database_mysql);
+            this.group_box_mysql_server.Controls.Add(this.label2);
             this.group_box_mysql_server.Controls.Add(this.textBox_port_mysql);
             this.group_box_mysql_server.Controls.Add(this.label11);
             this.group_box_mysql_server.Controls.Add(this.button_Save_mysql_connector);
@@ -182,7 +186,7 @@ namespace WinFormAction
             this.group_box_mysql_server.Controls.Add(this.label8);
             this.group_box_mysql_server.Location = new System.Drawing.Point(8, 12);
             this.group_box_mysql_server.Name = "group_box_mysql_server";
-            this.group_box_mysql_server.Size = new System.Drawing.Size(218, 231);
+            this.group_box_mysql_server.Size = new System.Drawing.Size(218, 260);
             this.group_box_mysql_server.TabIndex = 1;
             this.group_box_mysql_server.TabStop = false;
             this.group_box_mysql_server.Text = "MySQL Server";
@@ -206,7 +210,7 @@ namespace WinFormAction
             // 
             // button_Save_mysql_connector
             // 
-            this.button_Save_mysql_connector.Location = new System.Drawing.Point(137, 199);
+            this.button_Save_mysql_connector.Location = new System.Drawing.Point(137, 231);
             this.button_Save_mysql_connector.Name = "button_Save_mysql_connector";
             this.button_Save_mysql_connector.Size = new System.Drawing.Size(75, 23);
             this.button_Save_mysql_connector.TabIndex = 17;
@@ -238,11 +242,11 @@ namespace WinFormAction
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(7, 173);
+            this.label10.Location = new System.Drawing.Point(6, 158);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(58, 15);
+            this.label10.Size = new System.Drawing.Size(57, 30);
             this.label10.TabIndex = 11;
-            this.label10.Text = "Database:";
+            this.label10.Text = "Select\r\ndatabase:";
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // label5
@@ -305,6 +309,25 @@ namespace WinFormAction
             this.button_next.UseVisualStyleBackColor = true;
             this.button_next.Click += new System.EventHandler(this.button_next_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 203);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(83, 15);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Or create new:";
+            // 
+            // button_create_database_mysql
+            // 
+            this.button_create_database_mysql.Location = new System.Drawing.Point(137, 199);
+            this.button_create_database_mysql.Name = "button_create_database_mysql";
+            this.button_create_database_mysql.Size = new System.Drawing.Size(75, 23);
+            this.button_create_database_mysql.TabIndex = 21;
+            this.button_create_database_mysql.Text = "Create";
+            this.button_create_database_mysql.UseVisualStyleBackColor = true;
+            this.button_create_database_mysql.Click += new System.EventHandler(this.button_create_database_mysql_Click);
+            // 
             // firstauth
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -356,5 +379,7 @@ namespace WinFormAction
      
         private System.Windows.Forms.TextBox textBox_port_mysql;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button_create_database_mysql;
+        private System.Windows.Forms.Label label2;
     }
 }

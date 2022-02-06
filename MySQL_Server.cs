@@ -9,15 +9,42 @@ using System.Windows.Forms;
 
 namespace WinFormAction
 {
-    
     class MySQL_Server
     {
-        
-       
-        private MySqlConnection connector;
+        private MySqlConnection _connector;
 
-       
-
+        private string _query_create_db =
+             "CREATE DATABASE {0};" +
+             "    create table {0}.users" +
+             "(" +
+             "  _ID int (11) PRIMARY KEY AUTO_INCREMENT," +
+             "	_login nvarchar(64) not null," +
+             "	_nameVisibility nvarchar(64) not null" +
+             "   " +
+             ");" +
+             "create table {0}.config" +
+             "(" +
+             "    _ID int (11)  PRIMARY KEY AUTO_INCREMENT," +
+             "	_parametr nvarchar(64) not null," +
+             "	_value nvarchar(64) not null" +
+             "    " +
+             ");" +
+             "create table {0}.barcodes_lst" +
+             "(" +
+             "    _ID int (11)  PRIMARY KEY AUTO_INCREMENT," +
+             "	_value nvarchar(64) not null" +
+             "    " +
+             ");" +
+             "create table {0}.barcodes_reg" +
+             "(" +
+             "    _ID int (11)  PRIMARY KEY AUTO_INCREMENT," +
+             "	_barcode int not null," +
+             "    _cashierIssued int not null," +
+             "	_buyerReceived int not null," +
+             "    Foreign Key(_barcode) REFERENCES {0}.barcodes_lst(_ID)," +
+             "    Foreign Key(_cashierIssued) REFERENCES {0}.users(_ID)" +
+             ");";
+                  
         static public List<string> GetDatabases(string host, string port, string login, string password)
         {
             try
@@ -45,16 +72,36 @@ namespace WinFormAction
 
             try
             {
-                connector = new MySqlConnection("Database=" + Program._configuration.settings.settings_my_sql._database + ";Data Source=" + Program._configuration.settings.settings_my_sql._host + ":" + Program._configuration.settings.settings_my_sql._port + ";User Id=" + Program._configuration.settings.settings_my_sql._login + ";Password=" + Program._configuration.settings.settings_ms_sql._password);
-                connector.Open();
-                connector.Close();
+                _connector = new MySqlConnection("Database=" + Program._configuration.settings.settings_my_sql._database + ";Data Source=" + Program._configuration.settings.settings_my_sql._host + ":" + Program._configuration.settings.settings_my_sql._port + ";User Id=" + Program._configuration.settings.settings_my_sql._login + ";Password=" + Program._configuration.settings.settings_ms_sql._password);
+                _connector.Open();
+                _connector.Close();
             }
             catch (Exception e)
             {
-                connector = null;
+                _connector = null;
             }
         }
-
+        public void create_database()
+        {
+            try
+            {
+                if (Program._configuration.settings.settings_my_sql._database == "" || Program._configuration.settings.settings_my_sql._database == null)
+                {
+                    _connector = new MySqlConnection("Database=" + Program._configuration.settings.settings_my_sql._database + ";Data Source=" + Program._configuration.settings.settings_my_sql._host + ":" + Program._configuration.settings.settings_my_sql._port + ";User Id=" + Program._configuration.settings.settings_my_sql._login + ";Password=" + Program._configuration.settings.settings_ms_sql._password);
+                    _connector.Open();
+                }
+                else
+                {
+                    MySqlCommand _query = new MySqlCommand(_query_create_db.Replace("{0}", Program._configuration.settings.settings_my_sql._database), _connector);
+                    MessageBox.Show(_query.ExecuteNonQuery().ToString());
+                    _connector.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                _connector = null;
+            }
+        }
     } 
 
 }

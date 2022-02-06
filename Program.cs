@@ -5,15 +5,18 @@ namespace WinFormAction
 {
     static class Program
     {
-
-        public static configuration _configuration ;
+        public static MSSQL_Server _MSSQL;
+        public static MySQL_Server _MySQL;
+        public static configuration _configuration;
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-
+            _configuration = new configuration("");
+            _MySQL = new MySQL_Server();
+            _MSSQL = new MSSQL_Server();
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
