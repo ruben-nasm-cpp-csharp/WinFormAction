@@ -17,7 +17,7 @@ namespace WinFormAction
             InitializeComponent();
             
         }
-
+        BindingSource _bs_database_mysql = new BindingSource();
         private void label10_Click(object sender, EventArgs e)
         {
 
@@ -30,9 +30,9 @@ namespace WinFormAction
 
         private void button_Connect_mysql_Click(object sender, EventArgs e)
         {
-            BindingSource bs = new BindingSource();
-            bs.DataSource = MySQL_Server.GetDatabases(comboBox_host_mysql.Text, textBox_port_mysql.Text, textBox_login_mysql.Text, textBox_password_mysql.Text);
-            comboBox_database_mysql.DataSource = bs;
+
+            _bs_database_mysql.DataSource = MySQL_Server.GetDatabases(comboBox_host_mysql.Text, textBox_port_mysql.Text, textBox_login_mysql.Text, textBox_password_mysql.Text);
+            comboBox_database_mysql.DataSource = _bs_database_mysql;
         }
 
         private void button_Connect_mssql_Click(object sender, EventArgs e)
@@ -74,12 +74,14 @@ namespace WinFormAction
 
         private void button_create_database_mysql_Click(object sender, EventArgs e)
         {
-            Program._configuration.settings.settings_my_sql._database = comboBox_database_mysql.Text;
+            
             Program._configuration.settings.settings_my_sql._host = comboBox_host_mysql.Text;
             Program._configuration.settings.settings_my_sql._login = textBox_login_mysql.Text;
             Program._configuration.settings.settings_my_sql._password = textBox_password_mysql.Text;
             Program._configuration.settings.settings_my_sql._port = textBox_port_mysql.Text;
             Program._MySQL.create_database();
+            _bs_database_mysql.Add("ActionDataBase");
+            comboBox_database_mysql.SelectedItem = "ActionDataBase";
         }
     }
 }

@@ -72,7 +72,7 @@ namespace WinFormAction
 
             try
             {
-                _connector = new MySqlConnection("Database=" + Program._configuration.settings.settings_my_sql._database + ";Data Source=" + Program._configuration.settings.settings_my_sql._host + ":" + Program._configuration.settings.settings_my_sql._port + ";User Id=" + Program._configuration.settings.settings_my_sql._login + ";Password=" + Program._configuration.settings.settings_ms_sql._password);
+                _connector = new MySqlConnection("Database=" + Program._configuration.settings.settings_my_sql._database + ";Server=" + Program._configuration.settings.settings_my_sql._host + ";Port=" + Program._configuration.settings.settings_my_sql._port + ";Uid=" + Program._configuration.settings.settings_my_sql._login + ";Pwd=" + Program._configuration.settings.settings_my_sql._password);
                 _connector.Open();
                 _connector.Close();
             }
@@ -83,24 +83,20 @@ namespace WinFormAction
         }
         public void create_database()
         {
-            try
-            {
+            
                 if (Program._configuration.settings.settings_my_sql._database == "" || Program._configuration.settings.settings_my_sql._database == null)
                 {
-                    _connector = new MySqlConnection("Database=" + Program._configuration.settings.settings_my_sql._database + ";Data Source=" + Program._configuration.settings.settings_my_sql._host + ":" + Program._configuration.settings.settings_my_sql._port + ";User Id=" + Program._configuration.settings.settings_my_sql._login + ";Password=" + Program._configuration.settings.settings_ms_sql._password);
+                    _connector = new MySqlConnection("Server=" + Program._configuration.settings.settings_my_sql._host + ";Port=" + Program._configuration.settings.settings_my_sql._port + ";Uid=" + Program._configuration.settings.settings_my_sql._login + ";Pwd=" + Program._configuration.settings.settings_my_sql._password);
                     _connector.Open();
-                }
-                else
-                {
-                    MySqlCommand _query = new MySqlCommand(_query_create_db.Replace("{0}", Program._configuration.settings.settings_my_sql._database), _connector);
+                    MySqlCommand _query = new MySqlCommand(_query_create_db.Replace("{0}", "ActionDataBase"), _connector);
                     MessageBox.Show(_query.ExecuteNonQuery().ToString());
                     _connector.Close();
                 }
-            }
-            catch (Exception e)
-            {
-                _connector = null;
-            }
+                else
+                {
+                    
+                }
+           
         }
     } 
 
