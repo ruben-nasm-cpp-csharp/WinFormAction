@@ -6,7 +6,7 @@ namespace WinFormAction
     static class Program
     {
 
-
+        public static configuration _configuration ;
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>

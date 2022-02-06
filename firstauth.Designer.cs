@@ -32,14 +32,12 @@ namespace WinFormAction
             this.group_box_mssql_server = new System.Windows.Forms.GroupBox();
             this.button_Save_mssql_connector = new System.Windows.Forms.Button();
             this.button_Connect_mssql = new System.Windows.Forms.Button();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.comboBox_database_mssql = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_password_mssql = new System.Windows.Forms.TextBox();
             this.textBox_login_mssql = new System.Windows.Forms.TextBox();
-            this.comboBox_provider_mssql = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox_host_mssql = new System.Windows.Forms.ComboBox();
             this.group_box_mysql_server = new System.Windows.Forms.GroupBox();
@@ -64,14 +62,12 @@ namespace WinFormAction
             // 
             this.group_box_mssql_server.Controls.Add(this.button_Save_mssql_connector);
             this.group_box_mssql_server.Controls.Add(this.button_Connect_mssql);
-            this.group_box_mssql_server.Controls.Add(this.comboBox5);
+            this.group_box_mssql_server.Controls.Add(this.comboBox_database_mssql);
             this.group_box_mssql_server.Controls.Add(this.label9);
             this.group_box_mssql_server.Controls.Add(this.label4);
             this.group_box_mssql_server.Controls.Add(this.label3);
             this.group_box_mssql_server.Controls.Add(this.textBox_password_mssql);
             this.group_box_mssql_server.Controls.Add(this.textBox_login_mssql);
-            this.group_box_mssql_server.Controls.Add(this.comboBox_provider_mssql);
-            this.group_box_mssql_server.Controls.Add(this.label2);
             this.group_box_mssql_server.Controls.Add(this.label1);
             this.group_box_mssql_server.Controls.Add(this.comboBox_host_mssql);
             this.group_box_mssql_server.Location = new System.Drawing.Point(232, 12);
@@ -83,7 +79,7 @@ namespace WinFormAction
             // 
             // button_Save_mssql_connector
             // 
-            this.button_Save_mssql_connector.Location = new System.Drawing.Point(142, 199);
+            this.button_Save_mssql_connector.Location = new System.Drawing.Point(142, 165);
             this.button_Save_mssql_connector.Name = "button_Save_mssql_connector";
             this.button_Save_mssql_connector.Size = new System.Drawing.Size(75, 23);
             this.button_Save_mssql_connector.TabIndex = 18;
@@ -93,7 +89,7 @@ namespace WinFormAction
             // 
             // button_Connect_mssql
             // 
-            this.button_Connect_mssql.Location = new System.Drawing.Point(142, 141);
+            this.button_Connect_mssql.Location = new System.Drawing.Point(142, 107);
             this.button_Connect_mssql.Name = "button_Connect_mssql";
             this.button_Connect_mssql.Size = new System.Drawing.Size(75, 23);
             this.button_Connect_mssql.TabIndex = 17;
@@ -101,19 +97,19 @@ namespace WinFormAction
             this.button_Connect_mssql.UseVisualStyleBackColor = true;
             this.button_Connect_mssql.Click += new System.EventHandler(this.button_Connect_mssql_Click);
             // 
-            // comboBox5
+            // comboBox_database_mssql
             // 
-            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(80, 170);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(137, 23);
-            this.comboBox5.TabIndex = 10;
+            this.comboBox_database_mssql.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_database_mssql.FormattingEnabled = true;
+            this.comboBox_database_mssql.Location = new System.Drawing.Point(80, 136);
+            this.comboBox_database_mssql.Name = "comboBox_database_mssql";
+            this.comboBox_database_mssql.Size = new System.Drawing.Size(137, 23);
+            this.comboBox_database_mssql.TabIndex = 10;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 173);
+            this.label9.Location = new System.Drawing.Point(16, 141);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(58, 15);
             this.label9.TabIndex = 9;
@@ -122,7 +118,7 @@ namespace WinFormAction
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 115);
+            this.label4.Location = new System.Drawing.Point(6, 81);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 15);
             this.label4.TabIndex = 8;
@@ -131,15 +127,15 @@ namespace WinFormAction
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 86);
+            this.label3.Location = new System.Drawing.Point(25, 52);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 15);
+            this.label3.Size = new System.Drawing.Size(40, 15);
             this.label3.TabIndex = 7;
-            this.label3.Text = "login:";
+            this.label3.Text = "Login:";
             // 
             // textBox_password_mssql
             // 
-            this.textBox_password_mssql.Location = new System.Drawing.Point(80, 112);
+            this.textBox_password_mssql.Location = new System.Drawing.Point(80, 78);
             this.textBox_password_mssql.Name = "textBox_password_mssql";
             this.textBox_password_mssql.PasswordChar = '*';
             this.textBox_password_mssql.Size = new System.Drawing.Size(137, 23);
@@ -147,28 +143,10 @@ namespace WinFormAction
             // 
             // textBox_login_mssql
             // 
-            this.textBox_login_mssql.Location = new System.Drawing.Point(80, 83);
+            this.textBox_login_mssql.Location = new System.Drawing.Point(80, 49);
             this.textBox_login_mssql.Name = "textBox_login_mssql";
             this.textBox_login_mssql.Size = new System.Drawing.Size(137, 23);
             this.textBox_login_mssql.TabIndex = 5;
-            // 
-            // comboBox_provider_mssql
-            // 
-            this.comboBox_provider_mssql.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_provider_mssql.FormattingEnabled = true;
-            this.comboBox_provider_mssql.Location = new System.Drawing.Point(80, 53);
-            this.comboBox_provider_mssql.Name = "comboBox_provider_mssql";
-            this.comboBox_provider_mssql.Size = new System.Drawing.Size(137, 23);
-            this.comboBox_provider_mssql.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 56);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Provider:";
             // 
             // label1
             // 
@@ -319,7 +297,7 @@ namespace WinFormAction
             // 
             // button_next
             // 
-            this.button_next.Location = new System.Drawing.Point(376, 249);
+            this.button_next.Location = new System.Drawing.Point(381, 249);
             this.button_next.Name = "button_next";
             this.button_next.Size = new System.Drawing.Size(75, 23);
             this.button_next.TabIndex = 2;
@@ -331,7 +309,7 @@ namespace WinFormAction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 278);
+            this.ClientSize = new System.Drawing.Size(463, 280);
             this.Controls.Add(this.button_next);
             this.Controls.Add(this.group_box_mysql_server);
             this.Controls.Add(this.group_box_mssql_server);
@@ -348,19 +326,15 @@ namespace WinFormAction
 
         #endregion
 
-        private System.Windows.Forms.GroupBox group_box_sql_server;
-        private System.Windows.Forms.GroupBox groupBox2;
+
         private System.Windows.Forms.GroupBox group_box_mysql_server;
         private System.Windows.Forms.GroupBox group_box_mssql_server;
         private System.Windows.Forms.Button button_Connect_mssql;
-        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.ComboBox comboBox_database_mssql;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox_provider_mssql;
-        private System.Windows.Forms.Label label2;
+
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox_host_mssql;
         private System.Windows.Forms.Button button_Connect_mysql;
@@ -369,19 +343,17 @@ namespace WinFormAction
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox_login_mysql;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.TextBox textBox3;
+  
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button_Save_mssql_connector;
         private System.Windows.Forms.Button button_Save_mysql_connector;
         private System.Windows.Forms.Button button_next;
         private System.Windows.Forms.ComboBox comboBox_host_mysql;
-        private System.Windows.Forms.ComboBox comboBox_provider_mysql;
+       
         private System.Windows.Forms.TextBox textBox_password_mysql;
         private System.Windows.Forms.TextBox textBox_login_mssql;
         private System.Windows.Forms.TextBox textBox_password_mssql;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label7;
+     
         private System.Windows.Forms.TextBox textBox_port_mysql;
         private System.Windows.Forms.Label label11;
     }

@@ -15,6 +15,7 @@ namespace WinFormAction
         public firstauth()
         {
             InitializeComponent();
+            
         }
 
         private void label10_Click(object sender, EventArgs e)
@@ -36,7 +37,9 @@ namespace WinFormAction
 
         private void button_Connect_mssql_Click(object sender, EventArgs e)
         {
-
+            BindingSource bs = new BindingSource();
+            bs.DataSource = MSSQL_Server.GetDatabases(comboBox_host_mssql.Text, textBox_login_mssql.Text, textBox_password_mssql.Text);
+            comboBox_database_mssql.DataSource = bs;
         }
 
         private void firstauth_Load(object sender, EventArgs e)
@@ -55,6 +58,11 @@ namespace WinFormAction
         }
 
         private void button_next_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

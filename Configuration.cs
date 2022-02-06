@@ -29,7 +29,6 @@ namespace WinFormAction
         {
             public string _host;
             public string _port;
-            public string _provider;
             public string _database;
             public string _login;
             public string _password;
@@ -39,8 +38,6 @@ namespace WinFormAction
         public struct ms_sql
         {
             public string _host;
-            public string _port;
-            public string _provider;
             public string _database;
             public string _login;
             public string _password;
@@ -52,14 +49,12 @@ namespace WinFormAction
             try
             {
                 var app_settings = ConfigurationManager.AppSettings;
-               
+
                 settings.settings_ms_sql._host = app_settings["MS_SQL_HOST"];
-                settings.settings_ms_sql._port = app_settings["MS_SQL_PORT"];
-                settings.settings_ms_sql._provider = app_settings["MS_SQL_PROVIDER"];
                 settings.settings_ms_sql._database = app_settings["MS_SQL_DATABASE"];
                 settings.settings_my_sql._host = app_settings["My_SQL_HOST"];
                 settings.settings_my_sql._port = app_settings["My_SQL_PORT"];
-                settings.settings_my_sql._provider = app_settings["My_SQL_PROVIDER"];
+               
                 settings.settings_my_sql._database = app_settings["My_SQL_DATABASE"];
                 return 0;
                 
@@ -76,12 +71,10 @@ namespace WinFormAction
             {
                 var app_settings = ConfigurationManager.AppSettings;
                 app_settings.Add("MS_SQL_HOST", settings.settings_ms_sql._host);
-                app_settings.Add("MS_SQL_PORT", settings.settings_ms_sql._port);
-                app_settings.Add("MS_SQL_PROVIDER", settings.settings_ms_sql._provider);
                 app_settings.Add("MS_SQL_DATABASE", settings.settings_ms_sql._database);
                 app_settings.Add("My_SQL_HOST", settings.settings_my_sql._host);
                 app_settings.Add("My_SQL_PORT", settings.settings_my_sql._port);
-                app_settings.Add("My_SQL_PROVIDER", settings.settings_my_sql._provider);
+                
                 app_settings.Add("My_SQL_DATABASE", settings.settings_my_sql._database);
 
                 return 0;
