@@ -21,5 +21,13 @@ namespace WinFormAction
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Program._configuration.settings.settings_my_sql._login = textBox_login.Text;
+            Program._configuration.settings.settings_my_sql._password = textBox_password.Text;
+            Program._MySQL.Connection();
+            Program._MySQL.read_config_mssql();
+        }
     }
 }

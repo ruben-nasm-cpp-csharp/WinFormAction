@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Configuration;
+using System.Data;
+using System.IO;
 
 
 namespace WinFormAction
 {
     class configuration
     {
-        public configuration(string path_config)
-        {
+        public configuration()
+        { 
             settings = new settings_struct();
             settings.settings_ms_sql = new ms_sql();
             settings.settings_my_sql = new my_sql();
-            settings.path_config = path_config;
+          
         }
 
         public settings_struct settings; 
         
         public struct settings_struct
         {
-            public string path_config;
             public my_sql settings_my_sql;
             public ms_sql settings_ms_sql;
         }
@@ -48,18 +49,16 @@ namespace WinFormAction
         {
             try
             {
-                var app_settings = ConfigurationManager.AppSettings;
-
-                settings.settings_ms_sql._host = app_settings["MS_SQL_HOST"];
-                settings.settings_ms_sql._database = app_settings["MS_SQL_DATABASE"];
-                settings.settings_my_sql._host = app_settings["My_SQL_HOST"];
-                settings.settings_my_sql._port = app_settings["My_SQL_PORT"];
-               
-                settings.settings_my_sql._database = app_settings["My_SQL_DATABASE"];
+                DataSet config = new DataSet();
+                config.ReadXml(".\\ApplicationSettings.xml");
+                Program._configuration.settings.settings_my_sql._host = config.Tables[0].Rows[0][0].ToString();
+                Program._configuration.settings.settings_my_sql._port = config.Tables[0].Rows[0][1].ToString();
+                Program._configuration.settings.settings_my_sql._database = config.Tables[0].Rows[0][2].ToString();
+                
                 return 0;
                 
             }
-            catch (ConfigurationErrorsException)
+            catch 
             {
                 return 2;
             }
@@ -69,18 +68,23 @@ namespace WinFormAction
         {
             try
             {
-                var app_settings = ConfigurationManager.AppSettings;
-                app_settings.Add("MS_SQL_HOST", settings.settings_ms_sql._host);
-                app_settings.Add("MS_SQL_DATABASE", settings.settings_ms_sql._database);
-                app_settings.Add("My_SQL_HOST", settings.settings_my_sql._host);
-                app_settings.Add("My_SQL_PORT", settings.settings_my_sql._port);
+                Program._MySQL.Connection();
+                Program._MySQL.save_config_mssql();
+                DataTable settings_mysql = new DataTable();
+                settings_mysql.Columns.Add("host");
+                settings_mysql.Columns.Add("port");
+                settings_mysql.Columns.Add("database");
+                settings_mysql.Rows.Add(Program._configuration.settings.settings_my_sql._host, 
+                                        Program._configuration.settings.settings_my_sql._port, 
+                                        Program._configuration.settings.settings_my_sql._database);
+                DataSet config = new DataSet();
+                config.Tables.Add(settings_mysql);
+                config.WriteXml(".\\ApplicationSettings.xml");
                 
-                app_settings.Add("My_SQL_DATABASE", settings.settings_my_sql._database);
-
                 return 0;
 
             }
-            catch (ConfigurationErrorsException)
+            catch 
             {
                 return 1;
             }

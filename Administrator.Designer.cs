@@ -39,6 +39,11 @@ namespace WinFormAction
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox_update_param_action = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -52,15 +57,10 @@ namespace WinFormAction
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.groupBox_cashier.SuspendLayout();
             this.groupBox_update_param_action.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -175,6 +175,47 @@ namespace WinFormAction
             this.groupBox_update_param_action.TabIndex = 10;
             this.groupBox_update_param_action.TabStop = false;
             this.groupBox_update_param_action.Text = "Редактирование параметров акции ";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(5, 206);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(26, 15);
+            this.label11.TabIndex = 16;
+            this.label11.Text = "По:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(12, 177);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(18, 15);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "С:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 143);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 15);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Период выборки:";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(36, 200);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(200, 23);
+            this.dateTimePicker2.TabIndex = 13;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(36, 171);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 23);
+            this.dateTimePicker1.TabIndex = 12;
             // 
             // label8
             // 
@@ -291,47 +332,6 @@ namespace WinFormAction
             this.label9.TabIndex = 13;
             this.label9.Text = "Количество зарегистрированных штрихкодов:";
             // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(36, 171);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 23);
-            this.dateTimePicker1.TabIndex = 12;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(36, 200);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 23);
-            this.dateTimePicker2.TabIndex = 13;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 143);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 15);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Период выборки:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 177);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(18, 15);
-            this.label10.TabIndex = 15;
-            this.label10.Text = "С:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(5, 206);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(26, 15);
-            this.label11.TabIndex = 16;
-            this.label11.Text = "По:";
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button3);
@@ -345,6 +345,15 @@ namespace WinFormAction
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Просмотр данных акции";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(306, 321);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(87, 23);
+            this.button3.TabIndex = 17;
+            this.button3.Text = "Сброс";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -366,15 +375,6 @@ namespace WinFormAction
             this.label12.Size = new System.Drawing.Size(23, 15);
             this.label12.TabIndex = 22;
             this.label12.Text = "По";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(306, 321);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(87, 23);
-            this.button3.TabIndex = 17;
-            this.button3.Text = "Сброс";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // Administrator
             // 

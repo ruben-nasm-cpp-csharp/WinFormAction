@@ -14,13 +14,17 @@ namespace WinFormAction
         [STAThread]
         static void Main()
         {
-            _configuration = new configuration("");
+            _configuration = new configuration();
+            _configuration.read_setting();
             _MySQL = new MySQL_Server();
             _MSSQL = new MSSQL_Server();
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new firstauth());
+            if(_configuration.read_setting() == 0)
+                Application.Run(new auth());
+            else 
+                Application.Run(new firstauth());
         }
     }
 }
