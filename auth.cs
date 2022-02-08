@@ -26,8 +26,44 @@ namespace WinFormAction
         {
             Program._configuration.settings.settings_my_sql._login = textBox_login.Text;
             Program._configuration.settings.settings_my_sql._password = textBox_password.Text;
-            Program._MySQL.Connection();
-            Program._MySQL.read_config_mssql();
+            
+            if(Program._MySQL.Connection_database_test())
+            {
+                Program._MySQL.read_config_mssql();
+                if (Program._MSSQL.Connection_database_test())
+                {
+                    string[] user= Program._MySQL._get_user();
+                    if(user!=null)
+                    {
+                        Program._configuration.settings.settings_user._visibilityname = user[0];
+                        Program._configuration.settings.settings_user._type = user[1];
+                        switch(Program._configuration.settings.settings_user._type)
+                        {
+                            case "admin":
+                                this.Hide();
+                                Administrator _Administrator = new Administrator();
+                                _Administrator.Show();
+                                break;
+                            case "user":
+                                this.Hide();
+                                cashier _cashier = new cashier();
+                                _cashier.Show();
+                                break;
+                            default : 
+                                MessageBox.Show("При попытке авторизации произошла ошибка попробуйте позже или обратитесь к системному администратору!"); 
+                                break;
+                        }
+                    }
+                    else MessageBox.Show("При попытке авторизации произошла ошибка попробуйте позже или обратитесь к системному администратору!");
+                }
+                else
+                {
+                    MessageBox.Show("Нет подключения к базе данных \"Торговое место\" Обратитесь к системному администратору!");
+                }
+            }
+            else { MessageBox.Show("Ошибка подключения!\n Проверте правильность введенных данных, если данные введенны ВЕРНО, обратитесь к системному администратору!"); }
+            
+            
         }
     }
 }

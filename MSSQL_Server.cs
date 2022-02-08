@@ -87,7 +87,7 @@ namespace WinFormAction
         
 
 
-        public void Connection_test()
+        public bool Connection_test()
         {
 
             try
@@ -98,17 +98,21 @@ namespace WinFormAction
                                                 ";User Id=" + Program._configuration.settings.settings_ms_sql._login + 
                                                 ";Password=" + Program._configuration.settings.settings_ms_sql._password);
                 Connector.Open();
+               
+                
                 Connector.Close();
+                return true;
             }
             catch (Exception e)
             {
                 Connector = null;
                 MessageBox.Show(e.Message);
+                return false;
             }
         }
 
 
-        public void Connection_database_test()
+        public bool Connection_database_test()
         {
 
             try
@@ -119,12 +123,16 @@ namespace WinFormAction
                                                 ";User Id=" + Program._configuration.settings.settings_ms_sql._login +
                                                 ";Password=" + Program._configuration.settings.settings_ms_sql._password);
                 Connector.Open();
+                SqlCommand _query = new SqlCommand(SQL_Query, Connector);
+                _query.ExecuteNonQuery();
                 Connector.Close();
+                return true;
             }
             catch (Exception e)
             {
                 Connector = null;
                 MessageBox.Show(e.Message);
+                return false;
             }
         }
     }

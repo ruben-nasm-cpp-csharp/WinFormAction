@@ -17,7 +17,7 @@ namespace WinFormAction
                                               "ON DUPLICATE KEY UPDATE _value = '{2}';";
 
         private string _query_select_config = "SELECT _parametr,_value FROM config";
-
+        private string _query_select_user = "SELECT _nameVisibility,_type FROM {0}.users where {0}.users._login = '{1}' ";
         private string _query_create_db =
              "CREATE DATABASE {0};" +
              "    create table {0}.users" +
@@ -74,24 +74,33 @@ namespace WinFormAction
             }
             catch (Exception e) { MessageBox.Show(e.Message); return null; }
         }
-
-        public string Connection()
+        public string[] _get_user()
         {
             try
             {
-
-                _connector = new MySqlConnection("Database=" + Program._configuration.settings.settings_my_sql._database + ";Server=" + Program._configuration.settings.settings_my_sql._host + ";Port=" + Program._configuration.settings.settings_my_sql._port + ";Uid=" + Program._configuration.settings.settings_my_sql._login + ";Pwd=" + Program._configuration.settings.settings_my_sql._password);
                 _connector.Open();
+                string[] user = new string[2];
+                MySqlCommand _query = new MySqlCommand(_query_select_user.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                                                                         .Replace("{1}", Program._configuration.settings.settings_my_sql._login), _connector) ;
+                MySqlDataReader _query_reader = _query.ExecuteReader();
+                while (_query_reader.Read())
+                {
+                    user[0] = _query_reader[0].ToString();
+                    user[1] = _query_reader[1].ToString();
+                }
                 _connector.Close();
-                return null;
-             }
+
+                return user;
+            }
             catch (Exception e)
             {
-                _connector = null;
-                return e.Message.ToString();
+                
+                MessageBox.Show(e.Message);
+                return null;
             }
         }
-        public void Connection_database_test()
+
+        public bool Connection_database_test()
         {
 
             try
@@ -100,35 +109,44 @@ namespace WinFormAction
                                                  ";Server=" + Program._configuration.settings.settings_my_sql._host + ";Port=" + Program._configuration.settings.settings_my_sql._port + ";Uid=" + Program._configuration.settings.settings_my_sql._login + ";Pwd=" + Program._configuration.settings.settings_my_sql._password);
                 _connector.Open();
                 _connector.Close();
+                return true;
             }
             catch (Exception e)
             {
                 _connector = null;
                 MessageBox.Show(e.Message);
+                return false;
             }
         }
-        public void create_database()
+        public bool create_database()
         {
-            
-            if (Program._configuration.settings.settings_my_sql._database == "" || Program._configuration.settings.settings_my_sql._database == null)
+            try
             {
-                _connector = new MySqlConnection("Server=" + Program._configuration.settings.settings_my_sql._host + ";Port=" + Program._configuration.settings.settings_my_sql._port + ";Uid=" + Program._configuration.settings.settings_my_sql._login + ";Pwd=" + Program._configuration.settings.settings_my_sql._password);
-                _connector.Open();
-                MySqlCommand _query = new MySqlCommand(_query_create_db.Replace("{0}", _database_creation)
-                                                                       .Replace("{1}", Program._configuration.settings.settings_my_sql._login), _connector);
-                _query.ExecuteNonQuery();
-                _connector.Close();
+                if (Program._configuration.settings.settings_my_sql._database == "" || Program._configuration.settings.settings_my_sql._database == null)
+                {
+                    _connector = new MySqlConnection("Server=" + Program._configuration.settings.settings_my_sql._host + ";Port=" + Program._configuration.settings.settings_my_sql._port + ";Uid=" + Program._configuration.settings.settings_my_sql._login + ";Pwd=" + Program._configuration.settings.settings_my_sql._password);
+                    _connector.Open();
+                    MySqlCommand _query = new MySqlCommand(_query_create_db.Replace("{0}", _database_creation)
+                                                                           .Replace("{1}", Program._configuration.settings.settings_my_sql._login), _connector);
+                    _query.ExecuteNonQuery();
+                    _connector.Close();
+                }
+                else
+                {
+                    _connector = new MySqlConnection("Database=" + Program._configuration.settings.settings_my_sql._database + ";Server=" + Program._configuration.settings.settings_my_sql._host + ";Port=" + Program._configuration.settings.settings_my_sql._port + ";Uid=" + Program._configuration.settings.settings_my_sql._login + ";Pwd=" + Program._configuration.settings.settings_my_sql._password);
+                    _connector.Open();
+                    MySqlCommand _query = new MySqlCommand(_query_create_db.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                                                                           .Replace("{1}", Program._configuration.settings.settings_my_sql._login), _connector);
+                    _query.ExecuteNonQuery();
+                    _connector.Close();
+                }
+                return true;
             }
-            else
+            catch(Exception e)
             {
-                _connector = new MySqlConnection("Database=" + Program._configuration.settings.settings_my_sql._database + ";Server=" + Program._configuration.settings.settings_my_sql._host + ";Port=" + Program._configuration.settings.settings_my_sql._port + ";Uid=" + Program._configuration.settings.settings_my_sql._login + ";Pwd=" + Program._configuration.settings.settings_my_sql._password);
-                _connector.Open();
-                MySqlCommand _query = new MySqlCommand(_query_create_db.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
-                                                                       .Replace("{1}", Program._configuration.settings.settings_my_sql._login), _connector);
-                _query.ExecuteNonQuery();
-                _connector.Close();
+                MessageBox.Show(e.Message);
+                return false;
             }
-           
         }
 
         public void select_data_admin()
@@ -147,12 +165,14 @@ namespace WinFormAction
             {
                 _connector.Open();
                 string[] host = Program._configuration.settings.settings_ms_sql._host.Split('\\');
+                MessageBox.Show(host[0]);
                 MySqlCommand _query = new MySqlCommand(_query_insert_or_update_config.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
                                                                                      .Replace("{1}", "HOST_MSSQL")
                                                                                      .Replace("{2}", host[0]), _connector);
-                             _query = new MySqlCommand(_query_insert_or_update_config.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
-                                                                                     .Replace("{1}", "OBJ_MSSQL")
-                                                                                     .Replace("{2}", host[1]), _connector);
+                _query.ExecuteNonQuery();
+                _query = new MySqlCommand(_query_insert_or_update_config.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                                                                        .Replace("{1}", "OBJ_MSSQL")
+                                                                        .Replace("{2}", host[1]), _connector);
                 _query.ExecuteNonQuery();
                 _query = new MySqlCommand(_query_insert_or_update_config.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
                                                                         .Replace("{1}", "LOGN_MSSQL")
@@ -172,7 +192,7 @@ namespace WinFormAction
             catch (Exception e)
             {
 
-                _connector = null;
+                MessageBox.Show(e.Message);
                 return false;
             }
         }
@@ -210,8 +230,7 @@ namespace WinFormAction
              }
             catch (Exception e)
             {
-
-                _connector = null;
+                MessageBox.Show(e.Message);
                 return false;
             }
         }
