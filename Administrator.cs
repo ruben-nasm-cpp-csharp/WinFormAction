@@ -34,6 +34,13 @@ namespace WinFormAction
                 DROP - удалять таблицы;
                 EVENT - обработка событий;
                 TRIGGER - создание триггеров.
+
+                CREATE USER 'test_user'@'%' IDENTIFIED BY 'password';
+                GRANT SELECT ON actiondatabase1.users TO 'test_user'@'%';
+                GRANT SELECT ON actiondatabase1.config TO 'test_user'@'%';
+                GRANT SELECT ON actiondatabase1.barcodes_lst TO 'test_user'@'%';
+                GRANT SELECT,INSERT,UPDATE ON actiondatabase1.barcodes_reg TO 'test_user'@'%';
+                INSERT INTO actiondatabase1.users(actiondatabase1.users._login,actiondatabase1.users._nameVisibility,actiondatabase1.users._type) value ('test_user','Тестовый пользователь','user');
              */
         }
 
