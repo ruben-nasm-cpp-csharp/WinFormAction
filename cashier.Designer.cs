@@ -29,29 +29,29 @@ namespace WinFormAction
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView_byers = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_byers)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridView_byers
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 30);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(509, 128);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridView_byers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_byers.Location = new System.Drawing.Point(12, 30);
+            this.dataGridView_byers.Name = "dataGridView_byers";
+            this.dataGridView_byers.RowTemplate.Height = 25;
+            this.dataGridView_byers.Size = new System.Drawing.Size(509, 128);
+            this.dataGridView_byers.TabIndex = 0;
             // 
             // label1
             // 
@@ -101,31 +101,15 @@ namespace WinFormAction
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Добавление штрихкодов";
             // 
-            // label3
+            // button1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 23);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(250, 15);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "У выбранного клиента сейчас штрихкодов: ";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(62, 52);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(195, 15);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Возможно добавить штрихкодов: ";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(169, 94);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(147, 23);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
+            this.button1.Location = new System.Drawing.Point(323, 93);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Добавить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label5
             // 
@@ -136,15 +120,31 @@ namespace WinFormAction
             this.label5.TabIndex = 3;
             this.label5.Text = "Поле для ввода штрихкода:";
             // 
-            // button1
+            // textBox2
             // 
-            this.button1.Location = new System.Drawing.Point(323, 93);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Добавить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.textBox2.Location = new System.Drawing.Point(169, 94);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(147, 23);
+            this.textBox2.TabIndex = 2;
+            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(62, 52);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(195, 15);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Возможно добавить штрихкодов: ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 23);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(250, 15);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "У выбранного клиента сейчас штрихкодов: ";
             // 
             // cashier
             // 
@@ -156,10 +156,11 @@ namespace WinFormAction
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridView_byers);
             this.Name = "cashier";
             this.Text = "Кассир";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.cashier_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_byers)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -169,7 +170,7 @@ namespace WinFormAction
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView_byers;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
