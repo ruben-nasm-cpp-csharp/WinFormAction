@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -46,7 +47,30 @@ namespace WinFormAction
 
         private void Administrator_Load(object sender, EventArgs e)
         {
+           label_barcode_count.Text = "Количество штрихкодов: "  + Program._MySQL.count_barcode_admin();
+        }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        string[] _barcodes;
+        private void button_open_file_dialog_barcode_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog _select_file = new OpenFileDialog();
+            if (_select_file.ShowDialog() == DialogResult.OK) 
+            {
+                var sr = new StreamReader(_select_file.FileName);
+                if (textBox_splitter.Text != "" && textBox_splitter.Text != null)
+                {
+                    _barcodes = sr.ReadToEnd().Split(textBox_splitter.Text);
+                    Program._MySQL.insert_barcode_admin(_barcodes);
+                    label_barcode_count.Text = "Количество штрихкодов: " + Program._MySQL.count_barcode_admin();
+
+                }
+                else
+                    MessageBox.Show("Разделитель между кодами задан ошибочно!");
+            }
         }
     }
 }

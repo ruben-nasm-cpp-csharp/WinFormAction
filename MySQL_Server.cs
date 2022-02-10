@@ -15,7 +15,9 @@ namespace WinFormAction
         public string _database_creation;
         private string _query_insert_or_update_config = "INSERT INTO {0}.config (_parametr,_value) value ('{1}','{2}') " +
                                               "ON DUPLICATE KEY UPDATE _value = '{2}';";
-
+        private string _query_insert_barcode = "INSERT INTO {0}.barcodes_lst (_value) value ('{1}') ";
+        private string _query_count_barcode = "SELECT COUNT(_value) FROM {0}.barcodes_lst";
+        private string _query_select_barcode = "SELECT _value FROM {0}.barcodes_lst";
         private string _query_select_config = "SELECT _parametr,_value FROM config";
         private string _query_select_user = "SELECT _nameVisibility,_type FROM {0}.users where {0}.users._login = '{1}' ";
         private string _query_create_db =
@@ -154,18 +156,85 @@ namespace WinFormAction
             
         }
 
+        public bool insert_barcode_admin(string[] _barcodes)
+        {
+            int i = 0;
+            try
+            {
+                _connector.Open();
+                string[] host = Program._configuration.settings.settings_ms_sql._host.Split('\\');
+                MySqlCommand _query = new MySqlCommand(_query_select_barcode.Replace("{0}", Program._configuration.settings.settings_my_sql._database), _connector);
+                
+
+                foreach (string _barcode in _barcodes)
+                {
+                    if (_barcode != "" && _barcode != null)
+                    {
+                        MySqlDataReader _query_reader = _query.ExecuteReader();
+                        while (_query_reader.Read())
+                        {
+                            if (_barcode == _query_reader[0].ToString())
+                                goto sory_this; //
+                        }
+
+                            _query = new MySqlCommand(_query_insert_barcode.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                                                                                             .Replace("{1}", _barcode), _connector);
+                    
+                        _query.ExecuteNonQuery();
+                        i++;
+                        sory_this:;//
+                    }
+               
+                }
+                MessageBox.Show("Успешно добавленно " + i + "штрихкодов");
+                _connector.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Успешно добавленно " + i + "штрихкодов");
+                MessageBox.Show(e.Message);
+                return false;
+            }
+        }
+
+        public int count_barcode_admin()
+        {
+            try
+            {
+                _connector.Open();
+                
+                        MySqlCommand _query = new MySqlCommand(_query_count_barcode.Replace("{0}", Program._configuration.settings.settings_my_sql._database), _connector);
+                MySqlDataReader _query_reader = _query.ExecuteReader();
+                int _count = 0;
+                while (_query_reader.Read())
+                    _count =Convert.ToInt32( _query_reader[0]);
+
+
+                        _connector.Close();
+                return _count;
+                
+            }
+            catch (Exception e)
+            {
+                
+                MessageBox.Show(e.Message);
+                return 0;
+            }
+        }
+
         //public DataTable select_data_user(int user_id)
         //{
 
         //}
-         
+
         public bool save_config_mssql()
         {
             try
             {
                 _connector.Open();
                 string[] host = Program._configuration.settings.settings_ms_sql._host.Split('\\');
-                MessageBox.Show(host[0]);
+                
                 MySqlCommand _query = new MySqlCommand(_query_insert_or_update_config.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
                                                                                      .Replace("{1}", "HOST_MSSQL")
                                                                                      .Replace("{2}", host[0]), _connector);

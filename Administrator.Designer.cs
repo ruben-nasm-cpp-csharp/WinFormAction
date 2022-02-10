@@ -44,11 +44,11 @@ namespace WinFormAction
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
+            this.label_barcode_count = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox_splitter = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.button_open_file_dialog_barcode = new System.Windows.Forms.Button();
             this.update_param_action = new System.Windows.Forms.Button();
@@ -58,7 +58,6 @@ namespace WinFormAction
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox_cashier.SuspendLayout();
@@ -153,6 +152,7 @@ namespace WinFormAction
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(315, 23);
             this.comboBox1.TabIndex = 0;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // groupBox_update_param_action
             // 
@@ -161,11 +161,11 @@ namespace WinFormAction
             this.groupBox_update_param_action.Controls.Add(this.label2);
             this.groupBox_update_param_action.Controls.Add(this.dateTimePicker2);
             this.groupBox_update_param_action.Controls.Add(this.dateTimePicker1);
-            this.groupBox_update_param_action.Controls.Add(this.label8);
+            this.groupBox_update_param_action.Controls.Add(this.label_barcode_count);
             this.groupBox_update_param_action.Controls.Add(this.textBox4);
             this.groupBox_update_param_action.Controls.Add(this.label7);
             this.groupBox_update_param_action.Controls.Add(this.label6);
-            this.groupBox_update_param_action.Controls.Add(this.textBox3);
+            this.groupBox_update_param_action.Controls.Add(this.textBox_splitter);
             this.groupBox_update_param_action.Controls.Add(this.label5);
             this.groupBox_update_param_action.Controls.Add(this.button_open_file_dialog_barcode);
             this.groupBox_update_param_action.Controls.Add(this.update_param_action);
@@ -179,7 +179,7 @@ namespace WinFormAction
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(5, 206);
+            this.label11.Location = new System.Drawing.Point(6, 238);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(26, 15);
             this.label11.TabIndex = 16;
@@ -188,7 +188,7 @@ namespace WinFormAction
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 177);
+            this.label10.Location = new System.Drawing.Point(13, 209);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(18, 15);
             this.label10.TabIndex = 15;
@@ -197,38 +197,38 @@ namespace WinFormAction
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 143);
+            this.label2.Location = new System.Drawing.Point(13, 185);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 15);
+            this.label2.Size = new System.Drawing.Size(88, 15);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Период выборки:";
+            this.label2.Text = "Период акции:";
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(36, 200);
+            this.dateTimePicker2.Location = new System.Drawing.Point(37, 232);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 23);
             this.dateTimePicker2.TabIndex = 13;
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(36, 171);
+            this.dateTimePicker1.Location = new System.Drawing.Point(37, 203);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 23);
             this.dateTimePicker1.TabIndex = 12;
             // 
-            // label8
+            // label_barcode_count
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(132, 64);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(146, 15);
-            this.label8.TabIndex = 11;
-            this.label8.Text = "Количество штрихкодов:";
+            this.label_barcode_count.AutoSize = true;
+            this.label_barcode_count.Location = new System.Drawing.Point(17, 73);
+            this.label_barcode_count.Name = "label_barcode_count";
+            this.label_barcode_count.Size = new System.Drawing.Size(146, 15);
+            this.label_barcode_count.TabIndex = 11;
+            this.label_barcode_count.Text = "Количество штрихкодов:";
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(85, 99);
+            this.textBox4.Location = new System.Drawing.Point(185, 141);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(177, 23);
             this.textBox4.TabIndex = 10;
@@ -236,33 +236,33 @@ namespace WinFormAction
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(17, 102);
+            this.label7.Location = new System.Drawing.Point(18, 134);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(62, 15);
+            this.label7.Size = new System.Drawing.Size(161, 30);
             this.label7.TabIndex = 5;
-            this.label7.Text = "Делитель:";
+            this.label7.Text = "Необходимая сумма \r\nдля получения штрих-кода:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 64);
+            this.label6.Location = new System.Drawing.Point(17, 21);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(78, 15);
             this.label6.TabIndex = 4;
             this.label6.Text = "Разделитель:";
             // 
-            // textBox3
+            // textBox_splitter
             // 
-            this.textBox3.Location = new System.Drawing.Point(97, 61);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(29, 23);
-            this.textBox3.TabIndex = 3;
-            this.textBox3.Text = ",";
+            this.textBox_splitter.Location = new System.Drawing.Point(97, 18);
+            this.textBox_splitter.Name = "textBox_splitter";
+            this.textBox_splitter.Size = new System.Drawing.Size(29, 23);
+            this.textBox_splitter.TabIndex = 3;
+            this.textBox_splitter.Text = ",";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 36);
+            this.label5.Location = new System.Drawing.Point(17, 51);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 15);
             this.label5.TabIndex = 2;
@@ -270,12 +270,13 @@ namespace WinFormAction
             // 
             // button_open_file_dialog_barcode
             // 
-            this.button_open_file_dialog_barcode.Location = new System.Drawing.Point(97, 32);
+            this.button_open_file_dialog_barcode.Location = new System.Drawing.Point(97, 47);
             this.button_open_file_dialog_barcode.Name = "button_open_file_dialog_barcode";
             this.button_open_file_dialog_barcode.Size = new System.Drawing.Size(215, 23);
             this.button_open_file_dialog_barcode.TabIndex = 1;
             this.button_open_file_dialog_barcode.Text = "Указать файл с штрихкодами";
             this.button_open_file_dialog_barcode.UseVisualStyleBackColor = true;
+            this.button_open_file_dialog_barcode.Click += new System.EventHandler(this.button_open_file_dialog_barcode_Click);
             // 
             // update_param_action
             // 
@@ -295,32 +296,32 @@ namespace WinFormAction
             "Поиск покупателя по штрих-коду"});
             this.comboBox2.Location = new System.Drawing.Point(46, 26);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(122, 23);
+            this.comboBox2.Size = new System.Drawing.Size(181, 23);
             this.comboBox2.TabIndex = 20;
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(174, 26);
+            this.textBox5.Location = new System.Drawing.Point(233, 26);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(194, 23);
+            this.textBox5.Size = new System.Drawing.Size(266, 23);
             this.textBox5.TabIndex = 19;
             // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(248, 138);
+            this.dataGridView2.Location = new System.Drawing.Point(517, 138);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.Size = new System.Drawing.Size(145, 177);
+            this.dataGridView2.Size = new System.Drawing.Size(175, 328);
             this.dataGridView2.TabIndex = 18;
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(19, 138);
+            this.dataGridView1.Location = new System.Drawing.Point(6, 138);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(223, 177);
+            this.dataGridView1.Size = new System.Drawing.Size(505, 328);
             this.dataGridView1.TabIndex = 17;
             // 
             // label9
@@ -334,35 +335,25 @@ namespace WinFormAction
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Controls.Add(this.dataGridView2);
             this.groupBox1.Location = new System.Drawing.Point(423, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(405, 356);
+            this.groupBox1.Size = new System.Drawing.Size(698, 472);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Просмотр данных акции";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(306, 321);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(87, 23);
-            this.button3.TabIndex = 17;
-            this.button3.Text = "Сброс";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.comboBox2);
             this.groupBox2.Controls.Add(this.textBox5);
-            this.groupBox2.Location = new System.Drawing.Point(19, 51);
+            this.groupBox2.Location = new System.Drawing.Point(6, 51);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(374, 81);
+            this.groupBox2.Size = new System.Drawing.Size(505, 81);
             this.groupBox2.TabIndex = 21;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Поиск";
@@ -380,7 +371,7 @@ namespace WinFormAction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 493);
+            this.ClientSize = new System.Drawing.Size(1133, 493);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox_update_param_action);
             this.Controls.Add(this.groupBox_cashier);
@@ -413,11 +404,11 @@ namespace WinFormAction
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox_update_param_action;
         private System.Windows.Forms.Button update_param_action;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label_barcode_count;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox_splitter;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button_open_file_dialog_barcode;
         private System.Windows.Forms.Button button2;
@@ -434,6 +425,5 @@ namespace WinFormAction
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button button3;
     }
 }
