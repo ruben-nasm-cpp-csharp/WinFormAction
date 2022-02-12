@@ -15,7 +15,6 @@ namespace WinFormAction
     class MSSQL_Server
     {
         private string SQL_Query =  "SELECT"+
-                                    "        SUM([mo].[quantity]) as Количество,"+
                                     "		SUM([mo].[amount_outcome]) as Суммапродажи,"+ 
                                     "		co.Name as Покупатель ,"+
                                     "		co.phone as Телефон,"+
@@ -45,7 +44,7 @@ namespace WinFormAction
                                     "		co.email ,"+
                                     "		co.comment"+
                                     " ORDER by co.Name ";//format datetime '2021-01-10 23:59:59'
-        private SqlConnection Connector;
+        private SqlConnection _connector;
 
 
         static public List<string> GetDatabases(string host, string login, string password)
@@ -53,15 +52,15 @@ namespace WinFormAction
             try
             {
                 List<string> DataBases = new List<string>();
-                SqlConnection Connector = new SqlConnection("Persist Security Info=False;Server=" + host + ";User Id=" + login + ";Password=" + password);
-                Connector.Open();
-                SqlCommand query = new SqlCommand(" SELECT name FROM sys.databases; ", Connector);
+                SqlConnection _connector = new SqlConnection("Persist Security Info=False;Server=" + host + ";User Id=" + login + ";Password=" + password);
+                _connector.Open();
+                SqlCommand query = new SqlCommand(" SELECT name FROM sys.databases; ", _connector);
                 SqlDataReader MyDataReader = query.ExecuteReader();
                 while (MyDataReader.Read())
                 {
                     DataBases.Add(MyDataReader.GetString(0));
                 }
-                Connector.Close();
+                _connector.Close();
 
                 return DataBases;
             }
@@ -91,20 +90,20 @@ namespace WinFormAction
 
             try
             {
-                Connector = new SqlConnection(
+                _connector = new SqlConnection(
                                                 "Persist Security Info=False;Database=" + Program._configuration.settings.settings_ms_sql._database + 
                                                 ";Server=" + Program._configuration.settings.settings_ms_sql._host + 
                                                 ";User Id=" + Program._configuration.settings.settings_ms_sql._login + 
                                                 ";Password=" + Program._configuration.settings.settings_ms_sql._password);
-                Connector.Open();
+                _connector.Open();
                
                 
-                Connector.Close();
+                _connector.Close();
                 return true;
             }
             catch (Exception e)
             {
-                Connector = null;
+                _connector = null;
                 MessageBox.Show(e.Message);
                 return false;
             }
@@ -116,21 +115,21 @@ namespace WinFormAction
 
             try
             {
-                Connector = new SqlConnection(
+                _connector = new SqlConnection(
                                                 "Persist Security Info=False;Database=" + Program._configuration.settings.settings_ms_sql._database +
                                                 ";Server=" + Program._configuration.settings.settings_ms_sql._host +
                                                 ";User Id=" + Program._configuration.settings.settings_ms_sql._login +
                                                 ";Password=" + Program._configuration.settings.settings_ms_sql._password);
-                Connector.Open();
+                _connector.Open();
                 SqlCommand _query = new SqlCommand(SQL_Query.Replace("{0}", "2021-01-10 23:59:59")
-                                                            .Replace("{1}", "2021-01-10 23:59:59"), Connector);
+                                                            .Replace("{1}", "2021-01-10 23:59:59"), _connector);
                 _query.ExecuteNonQuery();
-                Connector.Close();
+                _connector.Close();
                 return true;
             }
             catch (Exception e)
             {
-                Connector = null;
+                _connector = null;
                 MessageBox.Show(e.Message);
                 return false;
             }
@@ -140,18 +139,18 @@ namespace WinFormAction
 
             try
             {
-                Connector = new SqlConnection(
+                _connector = new SqlConnection(
                                                 "Persist Security Info=False;Database=" + Program._configuration.settings.settings_ms_sql._database +
                                                 ";Server=" + Program._configuration.settings.settings_ms_sql._host +
                                                 ";User Id=" + Program._configuration.settings.settings_ms_sql._login +
                                                 ";Password=" + Program._configuration.settings.settings_ms_sql._password);
-                Connector.Open();
+                _connector.Open();
                 SqlCommand _query = new SqlCommand(SQL_Query.Replace("{0}", "2021-01-10 23:59:59")
-                                                            .Replace("{1}", "2021-01-10 23:59:59"), Connector);
+                                                            .Replace("{1}", "2022-01-10 23:59:59"), _connector);
                 SqlDataAdapter _adapter = new SqlDataAdapter(_query);
                 DataSet _ds_result = new DataSet();
                 _adapter.Fill(_ds_result);
-                Connector.Close();
+                _connector.Close();
                 return _ds_result.Tables[0];
             }
             catch (Exception e)

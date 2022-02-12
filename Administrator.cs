@@ -18,36 +18,16 @@ namespace WinFormAction
 
         private void groupBox_cashier_Enter(object sender, EventArgs e)
         {
-            //CREATE USER 'test_user'@'%' IDENTIFIED BY 'password';
-            //DROP USER 'itisgood'@'localhost'
-            //GRANT привилегии ON база_данных . таблица TO 'имя_пользователя'@'хост';
-            /*
-             * ALL PRIVILEGES - все, кроме GRANT;
-                USAGE PRIVILEGES - никаких привилегий;
-                SELECT - делать выборки из таблиц;
-                INSERT - вставлять данные в таблицу;
-                UPDATE - обновлять данные в таблице;
-                DELETE - удалять данные из таблицы;
-                FILE - разрешает читать файлы на сервере;
-                CREATE - создавать таблицы или базы данных;
-                ALTER - изменять структуру таблиц;
-                INDEX - создавать индексы для таблиц;
-                DROP - удалять таблицы;
-                EVENT - обработка событий;
-                TRIGGER - создание триггеров.
-
-                CREATE USER 'test_user'@'%' IDENTIFIED BY 'password';
-                GRANT SELECT ON actiondatabase1.users TO 'test_user'@'%';
-                GRANT SELECT ON actiondatabase1.config TO 'test_user'@'%';
-                GRANT SELECT ON actiondatabase1.barcodes_lst TO 'test_user'@'%';
-                GRANT SELECT,INSERT,UPDATE ON actiondatabase1.barcodes_reg TO 'test_user'@'%';
-                INSERT INTO actiondatabase1.users(actiondatabase1.users._login,actiondatabase1.users._nameVisibility,actiondatabase1.users._type) value ('test_user','Тестовый пользователь','user');
-             */
+            
         }
 
         private void Administrator_Load(object sender, EventArgs e)
         {
-           label_barcode_count.Text = "Количество штрихкодов: "  + Program._MySQL.count_barcode_admin();
+            label_barcode_count.Text = "Количество штрихкодов: "  + Program._MySQL.count_barcode_admin();
+            dataGridView_users.DataSource = Program._MySQL._get_user_dt();
+            dataGridView_bayers.DataSource = Program._MSSQL.get_byers_kayala_test();
+            dataGridView_bayers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,6 +51,34 @@ namespace WinFormAction
                 else
                     MessageBox.Show("Разделитель между кодами задан ошибочно!");
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Program._MySQL.create_user_admin(textBox_login_user.Text, textBox_visibility_name_user.Text, textBox_password.Text);
+            dataGridView_users.DataSource = Program._MySQL._get_user_dt();
+        }
+
+        private void textBox_password_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView_users_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView_users_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            textBox_login_user.Text = dataGridView_users.SelectedRows[0].Cells[0].Value.ToString();
+            textBox_visibility_name_user.Text = dataGridView_users.SelectedRows[0].Cells[1].Value.ToString();
         }
     }
 }

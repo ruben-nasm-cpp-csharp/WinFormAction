@@ -62,15 +62,24 @@ namespace WinFormAction
         {
             try
             {
-                if (Program._MSSQL.Connection_database_test())
+                Program._configuration.settings.settings_my_sql._database = comboBox_database_mysql.Text;
+                Program._configuration.settings.settings_my_sql._host = comboBox_host_mysql.Text;
+                Program._configuration.settings.settings_my_sql._login = textBox_login_mysql.Text;
+                Program._configuration.settings.settings_my_sql._password = textBox_password_mysql.Text;
+                Program._configuration.settings.settings_my_sql._port = textBox_port_mysql.Text;
+                if (Program._MySQL.Connection_database_test())
                 {
-                    Program._configuration.settings.settings_my_sql._database = comboBox_database_mysql.Text;
-                    Program._configuration.settings.settings_my_sql._host = comboBox_host_mysql.Text;
-                    Program._configuration.settings.settings_my_sql._login = textBox_login_mysql.Text;
-                    Program._configuration.settings.settings_my_sql._password = textBox_password_mysql.Text;
-                    Program._configuration.settings.settings_my_sql._port = textBox_port_mysql.Text;
+                    MessageBox.Show("Подключение к MySQLSERVER успешно!");
                 }
-                else { MessageBox.Show("Ошибка подключение к MSSQLSERVER проверте все данные и попытайтесь еще раз!"); }
+                else 
+                { 
+                    MessageBox.Show("Ошибка подключение к MySQLSERVER проверте все данные и попытайтесь еще раз!");
+                    Program._configuration.settings.settings_my_sql._database = null;
+                    Program._configuration.settings.settings_my_sql._host = null;
+                    Program._configuration.settings.settings_my_sql._login = null;
+                    Program._configuration.settings.settings_my_sql._password = null;
+                    Program._configuration.settings.settings_my_sql._port = null;
+                }
             }
             catch(Exception exc) 
             { 
