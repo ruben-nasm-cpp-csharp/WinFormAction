@@ -37,6 +37,8 @@ namespace WinFormAction
                     {
                         Program._configuration.settings.settings_user._visibilityname = user[0];
                         Program._configuration.settings.settings_user._type = user[1];
+                        if (!Program._MySQL.read_config_action())
+                            MessageBox.Show("Внимание данные акции не заполнены, перейдите в меню администратора и заполните соответствующие поля в левой нижней части окна!");
                         switch(Program._configuration.settings.settings_user._type)
                         {
                             case "admin":
@@ -52,6 +54,7 @@ namespace WinFormAction
                             default : 
                                 MessageBox.Show("При попытке авторизации произошла ошибка попробуйте позже или обратитесь к системному администратору!"); 
                                 break;
+
                         }
                     }
                     else MessageBox.Show("При попытке авторизации произошла ошибка попробуйте позже или обратитесь к системному администратору!");
@@ -64,6 +67,11 @@ namespace WinFormAction
             else { MessageBox.Show("Ошибка подключения!\n Проверте правильность введенных данных, если данные введенны ВЕРНО, обратитесь к системному администратору!"); }
             
             
+        }
+
+        private void auth_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

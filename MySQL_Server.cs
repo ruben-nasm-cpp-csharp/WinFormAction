@@ -15,23 +15,33 @@ namespace WinFormAction
         public string _database_creation;
 
         private string _query_delete_user = "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '{1}'@'%';" +
-                                            "DROP USER '{1}'@'%' ;"+
-                                            "DELETE FROM {0}.users WHERE {0}.users._login = '{2}'";
+                                            "DROP USER '{1}'@'%' ;" +
+                                            "DELETE FROM {0}.users WHERE {0}.users._login = '{1}'";
 
         private string _query_create_user = "CREATE USER '{1}'@'%' IDENTIFIED BY '{3}';" +
                                             "GRANT SELECT ON {0}.users TO '{1}'@'%';" +
                                             "GRANT SELECT ON {0}.config TO '{1}'@'%';" +
                                             "GRANT SELECT ON {0}.barcodes_lst TO '{1}'@'%';" +
-                                            "GRANT SELECT, INSERT ON actiondatabase1.barcodes_reg TO '{1}'@'%';" +
-                                            "INSERT INTO actiondatabase1.users(actiondatabase1.users._login, actiondatabase1.users._nameVisibility, actiondatabase1.users._type) " +
+                                            "GRANT SELECT, INSERT ON {0}.barcodes_reg TO '{1}'@'%';" +
+                                            "INSERT INTO {0}.users({0}.users._login, {0}.users._nameVisibility, {0}.users._type) " +
                                                                         "value('{1}','{2}','user');";
 
         private string _query_insert_or_update_config = "INSERT INTO {0}.config (_parametr,_value) value ('{1}','{2}') " +
                                               "ON DUPLICATE KEY UPDATE _value = '{2}';";
-
+        
+        private string _query_insert_barcode_reg = "INSERT INTO {0}.barcodes_reg (_barcode,_cashierIssued,_buyerReceived) value ({1},'{2}',{3}) ";//
+        
         private string _query_insert_barcode = "INSERT INTO {0}.barcodes_lst (_value) value ('{1}') ";
 
+        private string _query_select_barcode_user = "select bl._value from {0}.barcodes_reg br left join {0}.barcodes_lst bl on br._barcode = bl._ID where  br._buyerReceived = {1} ";
+
+        private string _query_sum_barcode_user = "select COUNT({0}.barcodes_reg._barcode) from {0}.barcodes_reg where {0}.barcodes_reg._buyerReceived = '{1}' ";
+
+        private string _query_sum_barcode_this = "select COUNT(br._barcode) from {0}.barcodes_reg br left join {0}.barcodes_lst bl on br._barcode = bl._ID where bl._value = '{1}' ";
+
         private string _query_count_barcode = "SELECT COUNT(_value) FROM {0}.barcodes_lst";
+
+        private string _query_select_this_barcode = "SELECT _ID FROM {0}.barcodes_lst where {0}.barcodes_lst._value = '{1}'";//
 
         private string _query_select_barcode = "SELECT _value FROM {0}.barcodes_lst";
 
@@ -70,7 +80,7 @@ namespace WinFormAction
              "      Foreign Key(_cashierIssued) REFERENCES {0}.users(_login)" +
              ");" +
             "" +
-            "Insert INTO {0}.users (_login,_nameVisibility,_type) Value ('{1}','Administrator','admin');";
+            "Insert INTO {0}.users ({0}.users._login,{0}.users._nameVisibility,{0}.users._type) Value ('{1}','Administrator','admin');";
                   
         //+
         //    "GRANT ALL PRIVILEGES ON {0}.* TO '{1}'@'%';"
@@ -142,7 +152,85 @@ namespace WinFormAction
                 return users;
             }
         }
+        public int _get_count_barcode_user(int userID)
+        {
+            try
+            {
+                _connector.Open();
 
+                MySqlCommand _query = new MySqlCommand(_query_sum_barcode_user.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                                                                              .Replace("{1}",userID.ToString()), _connector);
+                MySqlDataReader _query_reader = _query.ExecuteReader();
+                int _count = 0;
+                while (_query_reader.Read())
+                    _count = Convert.ToInt32(_query_reader[0]);
+
+
+                _connector.Close();
+                return _count;
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+                _connector.Close();
+                return 1;
+            }
+        }
+
+        public DataTable _get_user_barcode_reg(int userid)
+        {
+            DataTable res = new DataTable();
+            try
+            {
+                _connector.Open();
+                
+                MySqlCommand _query = new MySqlCommand(_query_select_barcode_user.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                                                                                 .Replace("{1}", userid.ToString()), _connector);
+                MySqlDataAdapter _query_reader = new MySqlDataAdapter(_query);
+                _query_reader.Fill(res);
+
+
+                _connector.Close();
+                return res;
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+                _connector.Close();
+                return null ;
+            }
+        }
+
+        public int _get_count_barcode_reg(int barcode)
+        {
+            try
+            {
+                _connector.Open();
+                
+                MySqlCommand _query = new MySqlCommand(_query_sum_barcode_this.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                                                                              .Replace("{1}", barcode.ToString()), _connector);
+                MySqlDataReader _query_reader = _query.ExecuteReader();
+                int _count = 0;
+                while (_query_reader.Read())
+                    _count = Convert.ToInt32(_query_reader[0]);
+
+
+                _connector.Close();
+                return _count;
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+                _connector.Close();
+                return 0;
+            }
+        }
         public bool Connection_database_test()
         {
 
@@ -203,38 +291,79 @@ namespace WinFormAction
             int i = 0;
             try
             {
-                _connector.Open();
+                
                 string[] host = Program._configuration.settings.settings_ms_sql._host.Split('\\');
-                MySqlCommand _query = new MySqlCommand(_query_select_barcode.Replace("{0}", Program._configuration.settings.settings_my_sql._database), _connector);
+                MySqlCommand _query1 = new MySqlCommand(_query_select_barcode.Replace("{0}", Program._configuration.settings.settings_my_sql._database), _connector);
                 
 
                 foreach (string _barcode in _barcodes)
                 {
                     if (_barcode != "" && _barcode != null)
                     {
-                        MySqlDataReader _query_reader = _query.ExecuteReader();
-                        while (_query_reader.Read())
+                        _connector.Open();
+                        MySqlDataReader _query_reader1 = _query1.ExecuteReader();
+                        while (_query_reader1.Read())
                         {
-                            if (_barcode == _query_reader[0].ToString())
+                            if (_barcode == _query_reader1[0].ToString())
                                 goto sory_this; //
                         }
-
-                            _query = new MySqlCommand(_query_insert_barcode.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                        _connector.Close();
+                        _connector.Open();
+                        MySqlCommand _query = new MySqlCommand(_query_insert_barcode.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
                                                                                              .Replace("{1}", _barcode), _connector);
                     
                         _query.ExecuteNonQuery();
+                        
                         i++;
                         sory_this:;//
+                        _connector.Close();
                     }
                
                 }
-                MessageBox.Show("Успешно добавленно " + i + "штрихкодов");
+                MessageBox.Show("Успешно добавленно " + i + "штрих-кодов");
                 _connector.Close();
                 return true;
             }
             catch (Exception e)
             {
-                MessageBox.Show("Успешно добавленно " + i + "штрихкодов");
+                MessageBox.Show("Успешно добавленно " + i + "штрих-кодов");
+                MessageBox.Show(e.Message);
+                _connector.Close();
+                return false;
+            }
+        }
+
+        public bool insert_barcode_user(string _barcode,string _userID)
+        {
+            int i = 0;
+            try
+            {
+                _connector.Open();
+               
+                MySqlCommand _query1 = new MySqlCommand(_query_select_this_barcode.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                                                                                                        .Replace("{1}", _barcode), _connector);
+                string barcodeid ="нет";
+                        MySqlDataReader _query_reader = _query1.ExecuteReader();
+                        while (_query_reader.Read())
+                        {
+                            barcodeid = _query_reader[0].ToString();
+                        }
+                _connector.Close();
+                _connector.Open();
+                MySqlCommand _query = new MySqlCommand(_query_insert_barcode_reg.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                                                                                         .Replace("{1}", barcodeid)
+                                                                                         .Replace("{2}", Program._configuration.settings.settings_my_sql._login)
+                                                                                          .Replace("{3}", _userID), _connector);
+
+                        _query.ExecuteNonQuery();
+                MessageBox.Show("Штрих-код добавлен к выбранному пользователю");
+                _connector.Close();
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Ошибка штрих-код не был занесен в базу!");
                 MessageBox.Show(e.Message);
                 _connector.Close();
                 return false;
@@ -282,6 +411,7 @@ namespace WinFormAction
 
 
                 _connector.Close();
+                MessageBox.Show("Пользователь создан!");
                 return true;
 
             }
@@ -328,13 +458,14 @@ namespace WinFormAction
             {
                 _connector.Open();
 
-                MySqlCommand _query = new MySqlCommand(_query_create_user.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                MySqlCommand _query = new MySqlCommand(_query_delete_user.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
                                                                         .Replace("{1}", user_name), _connector);
                 _query.ExecuteNonQuery();
 
 
 
                 _connector.Close();
+                MessageBox.Show("Пользователь удален!");
                 return true;
 
             }
@@ -359,25 +490,92 @@ namespace WinFormAction
                 string[] host = Program._configuration.settings.settings_ms_sql._host.Split('\\');
                 
                 MySqlCommand _query = new MySqlCommand(_query_insert_or_update_config.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
-                                                                                     .Replace("{1}", "HOST_MSSQL")
+                                                                                     .Replace("{1}", "MSSQL_HOST")
                                                                                      .Replace("{2}", host[0]), _connector);
                 _query.ExecuteNonQuery();
                 _query = new MySqlCommand(_query_insert_or_update_config.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
-                                                                        .Replace("{1}", "OBJ_MSSQL")
+                                                                        .Replace("{1}", "MSSQL_OBJ")
                                                                         .Replace("{2}", host[1]), _connector);
                 _query.ExecuteNonQuery();
                 _query = new MySqlCommand(_query_insert_or_update_config.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
-                                                                        .Replace("{1}", "LOGN_MSSQL")
+                                                                        .Replace("{1}", "MSSQL_LOGN")
                                                                         .Replace("{2}", Program._configuration.settings.settings_ms_sql._login), _connector);
                 _query.ExecuteNonQuery();
                 _query = new MySqlCommand(_query_insert_or_update_config.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
-                                                                        .Replace("{1}", "PASS_MSSQL")
+                                                                        .Replace("{1}", "MSSQL_PASS")
                                                                         .Replace("{2}", Program._configuration.settings.settings_ms_sql._password), _connector);
                 _query.ExecuteNonQuery();
                 _query = new MySqlCommand(_query_insert_or_update_config.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
-                                                                        .Replace("{1}", "DB_MSSQL")
+                                                                        .Replace("{1}", "MSSQL_DB")
                                                                         .Replace("{2}", Program._configuration.settings.settings_ms_sql._database), _connector);
                 _query.ExecuteNonQuery();
+                
+                _connector.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                _connector.Close();
+                MessageBox.Show(e.Message);
+                return false;
+            }
+        }
+        public bool save_config_action()
+        {
+            try
+            {
+                _connector.Open();
+                MySqlCommand _query = new MySqlCommand(_query_insert_or_update_config.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                                                                       .Replace("{1}", "ACTN_BGN_DT")
+                                                                       .Replace("{2}", Program._configuration.settings.settings_action.data_begin), _connector);
+                _query.ExecuteNonQuery();
+                _query = new MySqlCommand(_query_insert_or_update_config.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                                                                        .Replace("{1}", "ACTN_END_DT")
+                                                                        .Replace("{2}", Program._configuration.settings.settings_action.data_end), _connector);
+                _query.ExecuteNonQuery();
+                _query = new MySqlCommand(_query_insert_or_update_config.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                                                                        .Replace("{1}", "ACTN_CODE_COST")
+                                                                        .Replace("{2}", Convert.ToString(Program._configuration.settings.settings_action.barcode_cost)), _connector);
+                _query.ExecuteNonQuery();
+                _connector.Close();
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                _connector.Close();
+                MessageBox.Show(e.Message);
+                return false;
+            }
+        }
+        
+
+          public bool read_config_action()
+        {
+            try
+            {
+                _connector.Open();
+                MySqlCommand _query = new MySqlCommand(_query_select_config, _connector);
+                MySqlDataReader _query_reader = _query.ExecuteReader();
+                while (_query_reader.Read())
+                {
+                    switch (_query_reader["_parametr"])
+                    {
+                        case "ACTN_BGN_DT":
+                            Program._configuration.settings.settings_action.data_begin = _query_reader["_value"].ToString();
+                            break;
+                        case "ACTN_END_DT":
+                            Program._configuration.settings.settings_action.data_end = _query_reader["_value"].ToString();
+                            break;
+                        case "ACTN_CODE_COST":
+                            Program._configuration.settings.settings_action.barcode_cost = Convert.ToUInt32(_query_reader["_value"].ToString());
+                            break;
+
+                    }
+                    
+
+                   
+                }
                 _connector.Close();
                 return true;
             }
@@ -399,21 +597,22 @@ namespace WinFormAction
                 {
                     switch (_query_reader["_parametr"]) 
                     {
-                        case "HOST_MSSQL":
+                        case "MSSQL_HOST":
                             Program._configuration.settings.settings_ms_sql._host = _query_reader["_value"].ToString();
                             break;
-                        case "OBJ_MSSQL":
+                        case "MSSQL_OBJ":
                             Program._configuration.settings.settings_ms_sql._host += "\\"+_query_reader["_value"].ToString();
                             break;
-                        case "LOGN_MSSQL":
+                        case "MSSQL_LOGN":
                             Program._configuration.settings.settings_ms_sql._login = _query_reader["_value"].ToString();
                             break;
-                        case "PASS_MSSQL":
+                        case "MSSQL_PASS":
                             Program._configuration.settings.settings_ms_sql._password = _query_reader["_value"].ToString();
                             break;
-                        case "DB_MSSQL":
+                        case "MSSQL_DB":
                             Program._configuration.settings.settings_ms_sql._database = _query_reader["_value"].ToString();
                             break;
+                       
                     }
                 }
                 _connector.Close();

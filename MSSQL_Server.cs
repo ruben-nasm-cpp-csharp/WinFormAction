@@ -15,7 +15,8 @@ namespace WinFormAction
     class MSSQL_Server
     {
         private string SQL_Query =  "SELECT"+
-                                    "		SUM([mo].[amount_outcome]) as Суммапродажи,"+ 
+                                    "       co.Code,"+
+                                    "		SUM([mo].[amount_outcome]) as 'Сумма продажи',"+ 
                                     "		co.Name as Покупатель ,"+
                                     "		co.phone as Телефон,"+
                                     "		co.email as Email,"+
@@ -39,7 +40,8 @@ namespace WinFormAction
                                     "       [mo].[contractor] is not null"+
                                     "	 )"+
                                     " GROUP BY "+
-                                    "        co.Name ,"+
+                                    "       co.Code, " +
+                                    "       co.Name ,"+
                                     "		co.phone ,"+
                                     "		co.email ,"+
                                     "		co.comment"+
@@ -121,8 +123,8 @@ namespace WinFormAction
                                                 ";User Id=" + Program._configuration.settings.settings_ms_sql._login +
                                                 ";Password=" + Program._configuration.settings.settings_ms_sql._password);
                 _connector.Open();
-                SqlCommand _query = new SqlCommand(SQL_Query.Replace("{0}", "2021-01-10 23:59:59")
-                                                            .Replace("{1}", "2021-01-10 23:59:59"), _connector);
+                SqlCommand _query = new SqlCommand(SQL_Query.Replace("{0}", Program._configuration.settings.settings_action.data_begin)
+                                                            .Replace("{1}", Program._configuration.settings.settings_action.data_end), _connector);
                 _query.ExecuteNonQuery();
                 _connector.Close();
                 return true;
@@ -134,7 +136,7 @@ namespace WinFormAction
                 return false;
             }
         }
-        public DataTable get_byers_kayala_test()
+        public DataTable get_byers_kayala()
         {
 
             try
@@ -145,8 +147,8 @@ namespace WinFormAction
                                                 ";User Id=" + Program._configuration.settings.settings_ms_sql._login +
                                                 ";Password=" + Program._configuration.settings.settings_ms_sql._password);
                 _connector.Open();
-                SqlCommand _query = new SqlCommand(SQL_Query.Replace("{0}", "2021-01-10 23:59:59")
-                                                            .Replace("{1}", "2022-01-10 23:59:59"), _connector);
+                SqlCommand _query = new SqlCommand(SQL_Query.Replace("{0}", Program._configuration.settings.settings_action.data_begin)
+                                                            .Replace("{1}", Program._configuration.settings.settings_action.data_end), _connector);
                 SqlDataAdapter _adapter = new SqlDataAdapter(_query);
                 DataSet _ds_result = new DataSet();
                 _adapter.Fill(_ds_result);

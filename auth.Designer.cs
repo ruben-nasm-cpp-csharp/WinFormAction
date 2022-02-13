@@ -50,6 +50,7 @@ namespace WinFormAction
             // 
             this.textBox_password.Location = new System.Drawing.Point(61, 49);
             this.textBox_password.Name = "textBox_password";
+            this.textBox_password.PasswordChar = '*';
             this.textBox_password.Size = new System.Drawing.Size(263, 23);
             this.textBox_password.TabIndex = 2;
             // 
@@ -90,6 +91,7 @@ namespace WinFormAction
             this.Controls.Add(this.button_login);
             this.Name = "auth";
             this.Text = "Авторизация";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.auth_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

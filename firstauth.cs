@@ -95,8 +95,7 @@ namespace WinFormAction
 
         private void button_next_Click(object sender, EventArgs e)
         {
-            if (Program._MySQL.Connection_database_test())
-            {
+            
                 if (Program._MSSQL.Connection_database_test()) {
                     Program._configuration.write_settings();
                     Program._configuration.settings.settings_my_sql._login = "";
@@ -106,8 +105,7 @@ namespace WinFormAction
                     _auth.Show();
                 }
                 else { MessageBox.Show("Ошибка подключение к MSSQLSERVER проверте все данные и попытайтесь еще раз!"); }
-            }
-            else { MessageBox.Show("Ошибка подключение к MySQL проверте все данные и попытайтесь еще раз!"); }
+           
 
         }
 

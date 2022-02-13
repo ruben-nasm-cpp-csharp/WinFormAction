@@ -31,14 +31,14 @@ namespace WinFormAction
         {
             this.dataGridView_byers = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox_search = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label_barcode_now = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_byers)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -48,10 +48,15 @@ namespace WinFormAction
             // 
             this.dataGridView_byers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_byers.Location = new System.Drawing.Point(12, 30);
+            this.dataGridView_byers.MultiSelect = false;
             this.dataGridView_byers.Name = "dataGridView_byers";
+            this.dataGridView_byers.ReadOnly = true;
             this.dataGridView_byers.RowTemplate.Height = 25;
-            this.dataGridView_byers.Size = new System.Drawing.Size(509, 128);
+            this.dataGridView_byers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_byers.Size = new System.Drawing.Size(666, 308);
             this.dataGridView_byers.TabIndex = 0;
+            this.dataGridView_byers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_byers_CellClick);
+            this.dataGridView_byers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_byers_CellContentClick);
             // 
             // label1
             // 
@@ -62,14 +67,15 @@ namespace WinFormAction
             this.label1.TabIndex = 1;
             this.label1.Text = "Поиск по:";
             // 
-            // comboBox1
+            // comboBox_search
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(81, 6);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 23);
-            this.comboBox1.TabIndex = 2;
+            this.comboBox_search.Cursor = System.Windows.Forms.Cursors.Default;
+            this.comboBox_search.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_search.FormattingEnabled = true;
+            this.comboBox_search.Location = new System.Drawing.Point(81, 6);
+            this.comboBox_search.Name = "comboBox_search";
+            this.comboBox_search.Size = new System.Drawing.Size(121, 23);
+            this.comboBox_search.TabIndex = 2;
             // 
             // label2
             // 
@@ -86,15 +92,16 @@ namespace WinFormAction
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(236, 23);
             this.textBox1.TabIndex = 4;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label_barcode_now);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(13, 165);
+            this.groupBox1.Location = new System.Drawing.Point(18, 344);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(503, 137);
             this.groupBox1.TabIndex = 5;
@@ -128,14 +135,14 @@ namespace WinFormAction
             this.textBox2.TabIndex = 2;
             this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
             // 
-            // label4
+            // label_barcode_now
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(62, 52);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(195, 15);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Возможно добавить штрихкодов: ";
+            this.label_barcode_now.AutoSize = true;
+            this.label_barcode_now.Location = new System.Drawing.Point(62, 52);
+            this.label_barcode_now.Name = "label_barcode_now";
+            this.label_barcode_now.Size = new System.Drawing.Size(195, 15);
+            this.label_barcode_now.TabIndex = 1;
+            this.label_barcode_now.Text = "Возможно добавить штрихкодов: ";
             // 
             // label3
             // 
@@ -150,15 +157,16 @@ namespace WinFormAction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(528, 322);
+            this.ClientSize = new System.Drawing.Size(690, 493);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBox_search);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView_byers);
             this.Name = "cashier";
             this.Text = "Кассир";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.cashier_FormClosing);
             this.Load += new System.EventHandler(this.cashier_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_byers)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -179,7 +187,8 @@ namespace WinFormAction
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label_barcode_now;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBox_search;
     }
 }

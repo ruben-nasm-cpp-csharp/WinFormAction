@@ -17,6 +17,7 @@ namespace WinFormAction
             settings.settings_ms_sql = new ms_sql();
             settings.settings_my_sql = new my_sql();
             settings.settings_user = new user();
+            settings.settings_action = new action();
 
         }
 
@@ -27,6 +28,7 @@ namespace WinFormAction
             public my_sql settings_my_sql;
             public ms_sql settings_ms_sql;
             public user settings_user;
+            public action settings_action;
         }
         
         public struct my_sql
@@ -37,6 +39,12 @@ namespace WinFormAction
             public string _login;
             public string _password;
 
+        }
+        public struct action 
+        {
+            public string data_begin;
+            public string data_end;
+            public uint barcode_cost;
         }
         public struct user
         {
