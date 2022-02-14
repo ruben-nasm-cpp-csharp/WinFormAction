@@ -54,7 +54,7 @@ namespace WinFormAction
             this.dataGridView_byers.RowTemplate.Height = 25;
             this.dataGridView_byers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_byers.Size = new System.Drawing.Size(666, 308);
-            this.dataGridView_byers.TabIndex = 0;
+            this.dataGridView_byers.TabIndex = 3;
             this.dataGridView_byers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_byers_CellClick);
             this.dataGridView_byers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_byers_CellContentClick);
             // 
@@ -75,7 +75,7 @@ namespace WinFormAction
             this.comboBox_search.Location = new System.Drawing.Point(81, 6);
             this.comboBox_search.Name = "comboBox_search";
             this.comboBox_search.Size = new System.Drawing.Size(121, 23);
-            this.comboBox_search.TabIndex = 2;
+            this.comboBox_search.TabIndex = 1;
             // 
             // label2
             // 
@@ -91,7 +91,7 @@ namespace WinFormAction
             this.textBox1.Location = new System.Drawing.Point(285, 5);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(236, 23);
-            this.textBox1.TabIndex = 4;
+            this.textBox1.TabIndex = 2;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // groupBox1
@@ -113,7 +113,7 @@ namespace WinFormAction
             this.button1.Location = new System.Drawing.Point(323, 93);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
+            this.button1.TabIndex = 5;
             this.button1.Text = "Добавить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -132,7 +132,7 @@ namespace WinFormAction
             this.textBox2.Location = new System.Drawing.Point(169, 94);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(147, 23);
-            this.textBox2.TabIndex = 2;
+            this.textBox2.TabIndex = 4;
             this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
             // 
             // label_barcode_now

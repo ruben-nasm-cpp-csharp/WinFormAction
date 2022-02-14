@@ -109,7 +109,7 @@ namespace WinFormAction
             this.textBox_login_user.Location = new System.Drawing.Point(132, 16);
             this.textBox_login_user.Name = "textBox_login_user";
             this.textBox_login_user.Size = new System.Drawing.Size(105, 23);
-            this.textBox_login_user.TabIndex = 2;
+            this.textBox_login_user.TabIndex = 3;
             // 
             // label1
             // 
@@ -125,7 +125,7 @@ namespace WinFormAction
             this.button1.Location = new System.Drawing.Point(243, 73);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
+            this.button1.TabIndex = 6;
             this.button1.Text = "Создать";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -144,7 +144,7 @@ namespace WinFormAction
             this.textBox_password.Location = new System.Drawing.Point(132, 74);
             this.textBox_password.Name = "textBox_password";
             this.textBox_password.Size = new System.Drawing.Size(105, 23);
-            this.textBox_password.TabIndex = 4;
+            this.textBox_password.TabIndex = 5;
             this.textBox_password.TextChanged += new System.EventHandler(this.textBox_password_TextChanged);
             // 
             // textBox_visibility_name_user
@@ -152,7 +152,7 @@ namespace WinFormAction
             this.textBox_visibility_name_user.Location = new System.Drawing.Point(132, 45);
             this.textBox_visibility_name_user.Name = "textBox_visibility_name_user";
             this.textBox_visibility_name_user.Size = new System.Drawing.Size(105, 23);
-            this.textBox_visibility_name_user.TabIndex = 3;
+            this.textBox_visibility_name_user.TabIndex = 4;
             // 
             // label4
             // 
@@ -182,7 +182,7 @@ namespace WinFormAction
             this.button2.Location = new System.Drawing.Point(250, 212);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 6;
+            this.button2.TabIndex = 2;
             this.button2.Text = "Удалить";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -348,7 +348,7 @@ namespace WinFormAction
             this.dataGridView_barcode.RowTemplate.Height = 25;
             this.dataGridView_barcode.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_barcode.Size = new System.Drawing.Size(175, 493);
-            this.dataGridView_barcode.TabIndex = 16;
+            this.dataGridView_barcode.TabIndex = 17;
             // 
             // dataGridView_bayers
             // 
@@ -403,7 +403,8 @@ namespace WinFormAction
             this.textBox1.Location = new System.Drawing.Point(6, 30);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(163, 23);
-            this.textBox1.TabIndex = 14;
+            this.textBox1.TabIndex = 16;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // groupBox2
             // 

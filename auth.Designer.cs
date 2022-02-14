@@ -41,7 +41,7 @@ namespace WinFormAction
             this.button_login.Location = new System.Drawing.Point(249, 78);
             this.button_login.Name = "button_login";
             this.button_login.Size = new System.Drawing.Size(75, 23);
-            this.button_login.TabIndex = 0;
+            this.button_login.TabIndex = 3;
             this.button_login.Text = "Login";
             this.button_login.UseVisualStyleBackColor = true;
             this.button_login.Click += new System.EventHandler(this.button1_Click);
@@ -77,7 +77,7 @@ namespace WinFormAction
             this.textBox_login.Location = new System.Drawing.Point(61, 9);
             this.textBox_login.Name = "textBox_login";
             this.textBox_login.Size = new System.Drawing.Size(263, 23);
-            this.textBox_login.TabIndex = 5;
+            this.textBox_login.TabIndex = 1;
             // 
             // auth
             // 
