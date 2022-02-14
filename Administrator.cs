@@ -31,7 +31,7 @@ namespace WinFormAction
                 dateTimePicker_end_action.Value = DateTime.ParseExact(Program._configuration.settings.settings_action.data_end, "yyyy-dd-MM HH:mm:ss", null);
                 dateTimePicker_begin_action.Value = DateTime.ParseExact(Program._configuration.settings.settings_action.data_begin, "yyyy-dd-MM HH:mm:ss", null);
                 textBox_barcode_cost.Text = Program._configuration.settings.settings_action.barcode_cost.ToString();
-
+                dataGridView_search_barcode.DataSource = Program._MySQL._get_barcode();
 
             }
             catch { MessageBox.Show("Отображение списка покупателей не возможно в данных акции содержится ошибка!"); }
@@ -60,10 +60,11 @@ namespace WinFormAction
                     _barcodes = sr.ReadToEnd().Split(textBox_splitter.Text);
                     Program._MySQL.insert_barcode_admin(_barcodes);
                     label_barcode_count.Text = "Количество штрихкодов: " + Program._MySQL.count_barcode_admin();
-
+                    dataGridView_search_barcode.DataSource = Program._MySQL._get_barcode();
                 }
                 else
                     MessageBox.Show("Разделитель между кодами задан ошибочно!");
+
             }
         }
 
@@ -156,6 +157,57 @@ namespace WinFormAction
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void tabControl_search_admin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_refresh_users_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dataGridView_bayers.DataSource = Program._MSSQL.get_byers_kayala();
+            }
+            catch { }
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dataGridView_search_barcode.DataSource = Program._MySQL._get_barcode();
+            }
+            catch { }
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+            try
+            {
+                (dataGridView_search_barcode.DataSource as DataTable).DefaultView.RowFilter = string.Format("Код LIKE '%{0}%'", textBox1.Text);
+             }
+            catch { }
+        }
+
+        private void dataGridView_search_barcode_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+           
+                
+            
+        }
+
+        private void dataGridView_search_barcode_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+
+              string[] res =Program._MySQL._get_user_barcode(dataGridView_search_barcode.SelectedRows[0].Cells[0].Value.ToString());
+                label_user_barcode.Text = "Имя владельца кода: " + res[0] + ";\nНомер телефона: " + res[1] + ";\nEmail: " + res[2] + ";\nШтрихкод пробит: " + res[3];
+             }
+            catch { }
         }
     }
 }

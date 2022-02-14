@@ -60,10 +60,17 @@ namespace WinFormAction
             this.dataGridView_bayers = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button_refresh_users = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.tabControl_search_admin = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label_user_barcode = new System.Windows.Forms.Label();
+            this.dataGridView_search_barcode = new System.Windows.Forms.DataGridView();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox_cashier.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_users)).BeginInit();
@@ -71,8 +78,12 @@ namespace WinFormAction
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_barcode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_bayers)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.tabControl_search_admin.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_search_barcode)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox_cashier
@@ -328,14 +339,14 @@ namespace WinFormAction
             this.comboBox_search.Location = new System.Drawing.Point(46, 26);
             this.comboBox_search.Name = "comboBox_search";
             this.comboBox_search.Size = new System.Drawing.Size(131, 23);
-            this.comboBox_search.TabIndex = 13;
+            this.comboBox_search.TabIndex = 14;
             // 
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(183, 26);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(166, 23);
-            this.textBox5.TabIndex = 14;
+            this.textBox5.TabIndex = 15;
             this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // dataGridView_barcode
@@ -360,7 +371,7 @@ namespace WinFormAction
             this.dataGridView_bayers.RowTemplate.Height = 25;
             this.dataGridView_bayers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_bayers.Size = new System.Drawing.Size(507, 493);
-            this.dataGridView_bayers.TabIndex = 15;
+            this.dataGridView_bayers.TabIndex = 16;
             this.dataGridView_bayers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_bayers_CellClick);
             this.dataGridView_bayers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_bayers_CellContentClick);
             // 
@@ -375,12 +386,12 @@ namespace WinFormAction
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.groupBox4);
+            this.groupBox1.Controls.Add(this.button_refresh_users);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.dataGridView_bayers);
             this.groupBox1.Controls.Add(this.dataGridView_barcode);
-            this.groupBox1.Location = new System.Drawing.Point(349, 13);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(700, 647);
             this.groupBox1.TabIndex = 21;
@@ -388,23 +399,15 @@ namespace WinFormAction
             this.groupBox1.Text = "Просмотр данных акции";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // groupBox4
+            // button_refresh_users
             // 
-            this.groupBox4.Controls.Add(this.textBox1);
-            this.groupBox4.Location = new System.Drawing.Point(519, 51);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(175, 81);
-            this.groupBox4.TabIndex = 23;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Поиск штрихкода";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(6, 30);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(163, 23);
-            this.textBox1.TabIndex = 16;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.button_refresh_users.Location = new System.Drawing.Point(379, 109);
+            this.button_refresh_users.Name = "button_refresh_users";
+            this.button_refresh_users.Size = new System.Drawing.Size(75, 23);
+            this.button_refresh_users.TabIndex = 18;
+            this.button_refresh_users.Text = "Обновить";
+            this.button_refresh_users.UseVisualStyleBackColor = true;
+            this.button_refresh_users.Click += new System.EventHandler(this.button_refresh_users_Click);
             // 
             // groupBox2
             // 
@@ -427,12 +430,98 @@ namespace WinFormAction
             this.label12.TabIndex = 22;
             this.label12.Text = "По";
             // 
+            // tabControl_search_admin
+            // 
+            this.tabControl_search_admin.Controls.Add(this.tabPage1);
+            this.tabControl_search_admin.Controls.Add(this.tabPage2);
+            this.tabControl_search_admin.Location = new System.Drawing.Point(343, 9);
+            this.tabControl_search_admin.Name = "tabControl_search_admin";
+            this.tabControl_search_admin.SelectedIndex = 0;
+            this.tabControl_search_admin.Size = new System.Drawing.Size(721, 664);
+            this.tabControl_search_admin.TabIndex = 13;
+            this.tabControl_search_admin.SelectedIndexChanged += new System.EventHandler(this.tabControl_search_admin_SelectedIndexChanged);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(713, 636);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Поиск покупателей";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.button3);
+            this.tabPage2.Controls.Add(this.label_user_barcode);
+            this.tabPage2.Controls.Add(this.dataGridView_search_barcode);
+            this.tabPage2.Controls.Add(this.groupBox4);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(713, 636);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Поиск штрих-кодов";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(184, 603);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 21;
+            this.button3.Text = "Обновить";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label_user_barcode
+            // 
+            this.label_user_barcode.AutoSize = true;
+            this.label_user_barcode.Location = new System.Drawing.Point(184, 134);
+            this.label_user_barcode.Name = "label_user_barcode";
+            this.label_user_barcode.Size = new System.Drawing.Size(0, 15);
+            this.label_user_barcode.TabIndex = 25;
+            // 
+            // dataGridView_search_barcode
+            // 
+            this.dataGridView_search_barcode.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_search_barcode.Location = new System.Drawing.Point(3, 134);
+            this.dataGridView_search_barcode.MultiSelect = false;
+            this.dataGridView_search_barcode.Name = "dataGridView_search_barcode";
+            this.dataGridView_search_barcode.ReadOnly = true;
+            this.dataGridView_search_barcode.RowTemplate.Height = 25;
+            this.dataGridView_search_barcode.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_search_barcode.Size = new System.Drawing.Size(175, 493);
+            this.dataGridView_search_barcode.TabIndex = 20;
+            this.dataGridView_search_barcode.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_search_barcode_CellClick);
+            this.dataGridView_search_barcode.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_search_barcode_CellContentClick);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Location = new System.Drawing.Point(3, 47);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(175, 81);
+            this.groupBox4.TabIndex = 24;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Поиск штрихкода";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(6, 30);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(163, 23);
+            this.textBox1.TabIndex = 19;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            // 
             // Administrator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1061, 672);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.tabControl_search_admin);
             this.Controls.Add(this.groupBox_update_param_action);
             this.Controls.Add(this.groupBox_cashier);
             this.Name = "Administrator";
@@ -449,10 +538,15 @@ namespace WinFormAction
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_bayers)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.tabControl_search_admin.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_search_barcode)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -492,7 +586,14 @@ namespace WinFormAction
         private System.Windows.Forms.DataGridView dataGridView_users;
         private System.Windows.Forms.TextBox textBox_login_user;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TabControl tabControl_search_admin;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label label_user_barcode;
+        private System.Windows.Forms.DataGridView dataGridView_search_barcode;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button_refresh_users;
     }
 }

@@ -35,15 +35,21 @@ namespace WinFormAction
 
         private string _query_select_barcode_user = "select bl._value from {0}.barcodes_reg br left join {0}.barcodes_lst bl on br._barcode = bl._ID where  br._buyerReceived = {1} ";
 
+        private string _query_select_user_barcode = "select br._buyerReceived,br._cashierIssued from {0}.barcodes_reg br " +
+                                                    "left join {0}.barcodes_lst  bl on br._barcode = bl._ID " +
+            "                                       where bl._value = {1} ";/// <summary>
+        /// ////////////////////////////////////
+        /// </summary>
+
         private string _query_sum_barcode_user = "select COUNT({0}.barcodes_reg._barcode) from {0}.barcodes_reg where {0}.barcodes_reg._buyerReceived = '{1}' ";
 
-        private string _query_sum_barcode_this = "select COUNT(br._barcode) from {0}.barcodes_reg br left join {0}.barcodes_lst bl on br._barcode = bl._ID where bl._value = '{1}' ";
+        private string _query_sum_barcode_this = "select COUNT(br._barcode) from {0}.barcodes_reg br left join {0}.barcodes_lst bl on br._barcode = bl._ID  where bl._value = '{1}' ";
 
         private string _query_count_barcode = "SELECT COUNT(_value) FROM {0}.barcodes_lst";
 
         private string _query_select_this_barcode = "SELECT _ID FROM {0}.barcodes_lst where {0}.barcodes_lst._value = '{1}'";//
 
-        private string _query_select_barcode = "SELECT _value FROM {0}.barcodes_lst";
+        private string _query_select_barcode = "SELECT _value as 'Код' FROM {0}.barcodes_lst";
 
         private string _query_select_config = "SELECT _parametr,_value FROM config";
 
@@ -130,6 +136,70 @@ namespace WinFormAction
                 return null;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="barcode"></param>
+        /// <returns></returns>
+        public string[] _get_user_barcode(string barcode)
+        {
+            try
+            {
+                _connector.Open();
+                string[] result = new string[4];
+                MySqlCommand _query = new MySqlCommand(_query_select_user_barcode.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                                                                                 .Replace("{1}", barcode), _connector);
+                MySqlDataReader _query_reader = _query.ExecuteReader();
+               
+                while (_query_reader.Read())
+                {
+                    DataRow[] rekal = Program._MSSQL.get_byers_kayala().Select("Code = " + _query_reader[0].ToString());
+                    result[0] = rekal[0][2].ToString();
+                    result[1] = rekal[0][3].ToString();
+                    result[2] = rekal[0][4].ToString();
+                    result[3] = _query_reader[1].ToString();
+                }
+                _connector.Close();
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                _connector.Close();
+                MessageBox.Show(e.Message);
+                return null;
+            }
+        }
+
+        public DataTable _get_barcode()
+        {
+            DataTable res = new DataTable();
+            try
+            {
+                _connector.Open();
+
+                MySqlCommand _query = new MySqlCommand(_query_select_barcode.Replace("{0}", Program._configuration.settings.settings_my_sql._database), _connector);
+                MySqlDataAdapter _query_reader = new MySqlDataAdapter(_query);
+                _query_reader.Fill(res);
+                DataTable buf = new DataTable();
+                buf.Columns.Add("Код", typeof(string));
+                foreach(DataRow resrow in res.Rows)
+                {
+                    buf.Rows.Add(resrow[0].ToString());
+                }
+                 
+                _connector.Close();
+                return buf;
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+                _connector.Close();
+                return null;
+            }
+        }
 
         public DataTable _get_user_dt()
         {
@@ -204,6 +274,8 @@ namespace WinFormAction
                 return null ;
             }
         }
+
+        
 
         public int _get_count_barcode_reg(int barcode)
         {
@@ -281,10 +353,7 @@ namespace WinFormAction
             }
         }
 
-        public void select_data_admin()
-        {
-            
-        }
+       
 
         public bool insert_barcode_admin(string[] _barcodes)
         {
