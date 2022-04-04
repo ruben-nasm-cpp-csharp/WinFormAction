@@ -23,15 +23,11 @@ namespace WinFormAction
 
         private void Administrator_Load(object sender, EventArgs e)
         {
-            label_barcode_count.Text = "Количество штрихкодов: "  + Program._MySQL.count_barcode_admin();
-            dataGridView_users.DataSource = Program._MySQL._get_user_dt();
+            
             try
             {
                 dataGridView_bayers.DataSource = Program._MSSQL.get_byers_kayala();
-                dateTimePicker_end_action.Value = DateTime.ParseExact(Program._configuration.settings.settings_action.data_end, "yyyy-dd-MM HH:mm:ss", null);
-                dateTimePicker_begin_action.Value = DateTime.ParseExact(Program._configuration.settings.settings_action.data_begin, "yyyy-dd-MM HH:mm:ss", null);
-                textBox_barcode_cost.Text = Program._configuration.settings.settings_action.barcode_cost.ToString();
-                dataGridView_search_barcode.DataSource = Program._MySQL._get_barcode();
+               dataGridView_search_barcode.DataSource = Program._MySQL._get_barcode();
 
             }
             catch { MessageBox.Show("Отображение списка покупателей не возможно в данных акции содержится ошибка!"); }
@@ -51,27 +47,12 @@ namespace WinFormAction
         string[] _barcodes;
         private void button_open_file_dialog_barcode_Click(object sender, EventArgs e)
         {
-            OpenFileDialog _select_file = new OpenFileDialog();
-            if (_select_file.ShowDialog() == DialogResult.OK) 
-            {
-                var sr = new StreamReader(_select_file.FileName);
-                if (textBox_splitter.Text != "" && textBox_splitter.Text != null)
-                {
-                    _barcodes = sr.ReadToEnd().Split(textBox_splitter.Text);
-                    Program._MySQL.insert_barcode_admin(_barcodes);
-                    label_barcode_count.Text = "Количество штрихкодов: " + Program._MySQL.count_barcode_admin();
-                    dataGridView_search_barcode.DataSource = Program._MySQL._get_barcode();
-                }
-                else
-                    MessageBox.Show("Разделитель между кодами задан ошибочно!");
-
-            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Program._MySQL.create_user_admin(textBox_login_user.Text, textBox_visibility_name_user.Text, textBox_password.Text);
-            dataGridView_users.DataSource = Program._MySQL._get_user_dt();
+          
            
         }
 
@@ -95,8 +76,7 @@ namespace WinFormAction
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Program._MySQL.delete_user_admin(dataGridView_users.SelectedRows[0].Cells[0].Value.ToString());
-            dataGridView_users.DataSource = Program._MySQL._get_user_dt();
+           
            
 
         }
@@ -112,22 +92,7 @@ namespace WinFormAction
 
         private void update_param_action_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (Convert.ToUInt32(textBox_barcode_cost.Text) > 0)
-                    Program._configuration.settings.settings_action.barcode_cost = Convert.ToUInt32(textBox_barcode_cost.Text);
-                else MessageBox.Show("Сумма для получения штрих-кода не может быть отрицательной или равной нулю!");
-                Program._configuration.settings.settings_action.data_begin = dateTimePicker_begin_action.Value.ToString("yyyy-dd-MM")+ " 00:00:00";
-                Program._configuration.settings.settings_action.data_end = dateTimePicker_end_action.Value.ToString("yyyy-dd-MM") + " 00:00:00";
-                MessageBox.Show(Program._configuration.settings.settings_action.data_end);
-                dataGridView_bayers.DataSource = Program._MSSQL.get_byers_kayala();
-                Program._MySQL.save_config_action();
-                MessageBox.Show("Настройки сохранены!");
-            }
-            catch(Exception exc)
-            {
-                MessageBox.Show("При вводе произошла ошибка! "+exc.Message);
-            }
+            
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -207,6 +172,50 @@ namespace WinFormAction
               string[] res =Program._MySQL._get_user_barcode(dataGridView_search_barcode.SelectedRows[0].Cells[0].Value.ToString());
                 label_user_barcode.Text = "Имя владельца кода: " + res[0] + ";\nНомер телефона: " + res[1] + ";\nEmail: " + res[2] + ";\nШтрихкод пробит: " + res[3];
              }
+            catch { }
+        }
+
+        private void MenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            MessageBox.Show(e.ClickedItem.Name);
+            switch (e.ClickedItem.Name.ToString())
+            {
+                case "set_user": set_users form= new set_users(); form.Show(); break;
+                case "set_action_settings": set_action_settings_form form1 = new set_action_settings_form();if (form1.ShowDialog() == DialogResult.OK) { reset_form_data(); }; break;
+                case "action": Action form2 = new Action(); form2.ShowDialog(); break;
+            }
+            
+
+        }
+        private void reset_form_data() 
+        {
+            try
+            {
+                dataGridView_bayers.DataSource = Program._MSSQL.get_byers_kayala();
+                dataGridView_search_barcode.DataSource = Program._MySQL._get_barcode();
+
+            }
+            catch { MessageBox.Show("Отображение списка покупателей не возможно в данных акции содержится ошибка!"); }
+            dataGridView_bayers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            for (int i = 0; i < dataGridView_bayers.Columns.Count; i++)
+            {
+                if (dataGridView_bayers.Columns[i].Name != "Code" && dataGridView_bayers.Columns[i].Name != "Сумма продажи")
+                    comboBox_search.Items.Add(dataGridView_bayers.Columns[i].Name);
+            }
+            comboBox_search.SelectedIndex = 0;
+        }
+
+        private void delete_barcode_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Program._MySQL.delete_barcode_by_user(dataGridView_barcode.Rows[dataGridView_barcode.SelectedRows[0].Index].Cells[0].Value.ToString());
+            }
+            catch { }
+            try
+            {
+                dataGridView_barcode.DataSource = Program._MySQL._get_user_barcode_reg(Convert.ToInt32(dataGridView_bayers.SelectedRows[0].Cells[0].Value));
+            }
             catch { }
         }
     }

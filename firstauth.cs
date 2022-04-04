@@ -35,7 +35,7 @@ namespace WinFormAction
                 _bs_database_mysql.DataSource = MySQL_Server.GetDatabases(comboBox_host_mysql.Text, textBox_port_mysql.Text, textBox_login_mysql.Text, textBox_password_mysql.Text);
                 comboBox_database_mysql.DataSource = _bs_database_mysql;
             }
-            catch(Exception exc) { MessageBox.Show(exc.Message); }
+            catch(Exception exc) { MessageBox.Show(exc.Message+"fa.cs 38"); }
         }
 
         private void button_Connect_mssql_Click(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace WinFormAction
                 Program._configuration.settings.settings_ms_sql._login = textBox_login_mssql.Text;
                 Program._configuration.settings.settings_ms_sql._password = textBox_password_mssql.Text;
             }
-            catch { }
+            catch { MessageBox.Show("fa.cs 4352"); }
 
         }
 

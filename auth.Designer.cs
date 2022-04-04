@@ -90,7 +90,7 @@ namespace WinFormAction
             this.Controls.Add(this.textBox_password);
             this.Controls.Add(this.button_login);
             this.Name = "auth";
-            this.Text = "Авторизация";
+            this.Text = " ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.auth_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);

@@ -14,6 +14,8 @@ namespace WinFormAction
         private MySqlConnection _connector;
         public string _database_creation;
 
+        private string _query_set_password = "  set password for '{1}'@'%' = '{2}';";
+
         private string _query_delete_user = "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '{1}'@'%';" +
                                             "DROP USER '{1}'@'%' ;" +
                                             "DELETE FROM {0}.users WHERE {0}.users._login = '{1}'";
@@ -28,9 +30,9 @@ namespace WinFormAction
 
         private string _query_insert_or_update_config = "INSERT INTO {0}.config (_parametr,_value) value ('{1}','{2}') " +
                                               "ON DUPLICATE KEY UPDATE _value = '{2}';";
-        
+
         private string _query_insert_barcode_reg = "INSERT INTO {0}.barcodes_reg (_barcode,_cashierIssued,_buyerReceived) value ({1},'{2}',{3}) ";//
-        
+
         private string _query_insert_barcode = "INSERT INTO {0}.barcodes_lst (_value) value ('{1}') ";
 
         private string _query_select_barcode_user = "select bl._value from {0}.barcodes_reg br left join {0}.barcodes_lst bl on br._barcode = bl._ID where  br._buyerReceived = {1} ";
@@ -38,8 +40,8 @@ namespace WinFormAction
         private string _query_select_user_barcode = "select br._buyerReceived,br._cashierIssued from {0}.barcodes_reg br " +
                                                     "left join {0}.barcodes_lst  bl on br._barcode = bl._ID " +
             "                                       where bl._value = {1} ";/// <summary>
-        /// ////////////////////////////////////
-        /// </summary>
+                                                                            /// ////////////////////////////////////
+                                                                            /// </summary>
 
         private string _query_sum_barcode_user = "select COUNT({0}.barcodes_reg._barcode) from {0}.barcodes_reg where {0}.barcodes_reg._buyerReceived = '{1}' ";
 
@@ -54,12 +56,26 @@ namespace WinFormAction
         private string _query_select_config = "SELECT _parametr,_value FROM config";
 
         private string _query_select_user = "SELECT _nameVisibility,_type FROM {0}.users where {0}.users._login = '{1}' ";
+
         private string _query_select_user_all = "SELECT _login as 'Логин',_nameVisibility as 'Отображаемое имя', _type as 'Тип' FROM {0}.users ";
+
+        private string _delete_barcode_reg = "SET SQL_SAFE_UPDATES = 0; " +
+                                             "DELETE From {0}.barcodes_reg " +
+                                             "where {0}.barcodes_reg._barcode IN(select {0}.barcodes_lst._id from {0}.barcodes_lst where {0}.barcodes_lst._value = '{2}');" +
+                                             "SET SQL_SAFE_UPDATES = 1;" ;
+
+        private string _drop_table = "SET SQL_SAFE_UPDATES = 0;" +
+                                        "DELETE From {0}.barcodes_lst;" +
+                                        "DELETE From {0}.barcodes_reg;" +
+                                        "DELETE From {0}.config WHERE _parametr LIKE '%ACTN%';" +
+                                     "SET SQL_SAFE_UPDATES = 1;"
+            ;
+
 
         private string _query_create_db =
              "CREATE DATABASE {0};" +
              "    create table {0}.users" +
-             "("  +
+             "(" +
              "	_login nvarchar(64) not null PRIMARY KEY," +
              "	_nameVisibility nvarchar(64) not null," +
              "  _type nvarchar(64) not null " +
@@ -87,7 +103,7 @@ namespace WinFormAction
              ");" +
             "" +
             "Insert INTO {0}.users ({0}.users._login,{0}.users._nameVisibility,{0}.users._type) Value ('{1}','Administrator','admin');";
-                  
+
         //+
         //    "GRANT ALL PRIVILEGES ON {0}.* TO '{1}'@'%';"
 
@@ -109,8 +125,9 @@ namespace WinFormAction
 
                 return DataBases;
             }
-            catch (Exception e) { MessageBox.Show(e.Message); return null; }
+            catch (Exception e) { MessageBox.Show(e.Message + "MS.cs 1412"); return null; }
         }
+
         public string[] _get_user()
         {
             try
@@ -118,7 +135,7 @@ namespace WinFormAction
                 _connector.Open();
                 string[] user = new string[2];
                 MySqlCommand _query = new MySqlCommand(_query_select_user.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
-                                                                         .Replace("{1}", Program._configuration.settings.settings_my_sql._login), _connector) ;
+                                                                         .Replace("{1}", Program._configuration.settings.settings_my_sql._login), _connector);
                 MySqlDataReader _query_reader = _query.ExecuteReader();
                 while (_query_reader.Read())
                 {
@@ -150,7 +167,7 @@ namespace WinFormAction
                 MySqlCommand _query = new MySqlCommand(_query_select_user_barcode.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
                                                                                  .Replace("{1}", barcode), _connector);
                 MySqlDataReader _query_reader = _query.ExecuteReader();
-               
+
                 while (_query_reader.Read())
                 {
                     DataRow[] rekal = Program._MSSQL.get_byers_kayala().Select("Code = " + _query_reader[0].ToString());
@@ -183,11 +200,11 @@ namespace WinFormAction
                 _query_reader.Fill(res);
                 DataTable buf = new DataTable();
                 buf.Columns.Add("Код", typeof(string));
-                foreach(DataRow resrow in res.Rows)
+                foreach (DataRow resrow in res.Rows)
                 {
                     buf.Rows.Add(resrow[0].ToString());
                 }
-                 
+
                 _connector.Close();
                 return buf;
 
@@ -203,10 +220,10 @@ namespace WinFormAction
 
         public DataTable _get_user_dt()
         {
-            DataTable users= new DataTable();
+            DataTable users = new DataTable();
             try
             {
-                
+
                 _connector.Open();
                 MySqlCommand _query = new MySqlCommand(_query_select_user_all.Replace("{0}", Program._configuration.settings.settings_my_sql._database), _connector);
                 MySqlDataAdapter _query_reader = new MySqlDataAdapter(_query);
@@ -229,7 +246,7 @@ namespace WinFormAction
                 _connector.Open();
 
                 MySqlCommand _query = new MySqlCommand(_query_sum_barcode_user.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
-                                                                              .Replace("{1}",userID.ToString()), _connector);
+                                                                              .Replace("{1}", userID.ToString()), _connector);
                 MySqlDataReader _query_reader = _query.ExecuteReader();
                 int _count = 0;
                 while (_query_reader.Read())
@@ -255,7 +272,7 @@ namespace WinFormAction
             try
             {
                 _connector.Open();
-                
+
                 MySqlCommand _query = new MySqlCommand(_query_select_barcode_user.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
                                                                                  .Replace("{1}", userid.ToString()), _connector);
                 MySqlDataAdapter _query_reader = new MySqlDataAdapter(_query);
@@ -271,18 +288,18 @@ namespace WinFormAction
 
                 MessageBox.Show(e.Message);
                 _connector.Close();
-                return null ;
+                return null;
             }
         }
 
-        
+
 
         public int _get_count_barcode_reg(int barcode)
         {
             try
             {
                 _connector.Open();
-                
+
                 MySqlCommand _query = new MySqlCommand(_query_sum_barcode_this.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
                                                                               .Replace("{1}", barcode.ToString()), _connector);
                 MySqlDataReader _query_reader = _query.ExecuteReader();
@@ -308,7 +325,7 @@ namespace WinFormAction
 
             try
             {
-                _connector = new MySqlConnection("Database=" + Program._configuration.settings.settings_my_sql._database + 
+                _connector = new MySqlConnection("Database=" + Program._configuration.settings.settings_my_sql._database +
                                                  ";Server=" + Program._configuration.settings.settings_my_sql._host + ";Port=" + Program._configuration.settings.settings_my_sql._port + ";Uid=" + Program._configuration.settings.settings_my_sql._login + ";Pwd=" + Program._configuration.settings.settings_my_sql._password);
                 _connector.Open();
                 _connector.Close();
@@ -320,6 +337,31 @@ namespace WinFormAction
                 MessageBox.Show(e.Message);
                 return false;
             }
+        }
+        public void set_password(string new_password)
+        {
+            MySqlCommand _query = new MySqlCommand(_query_set_password.Replace("{1}", Program._configuration.settings.settings_my_sql._login)
+                                                                             .Replace("{2}", new_password.ToString()), _connector);
+            _connector.Open();
+            _query.ExecuteNonQuery();
+            _connector.Close();
+        }
+        public void drop_data()
+        {
+            MySqlCommand _query = new MySqlCommand(_drop_table.Replace("{0}", Program._configuration.settings.settings_my_sql._database), _connector);
+            _connector.Open();
+            _query.ExecuteNonQuery();
+            _connector.Close();
+        }
+        public void delete_barcode_by_user(string barcode)
+        {
+            MySqlCommand _query = new MySqlCommand(_delete_barcode_reg.Replace("{0}", Program._configuration.settings.settings_my_sql._database)
+                                                                            .Replace("{2}", barcode.ToString()), _connector);
+            _connector.Open();
+            _query.ExecuteNonQuery();
+            _connector.Close();
+            
+
         }
         public bool create_database()
         {

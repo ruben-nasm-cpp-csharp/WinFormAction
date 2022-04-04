@@ -66,7 +66,7 @@ namespace WinFormAction
 
                 return DataBases;
             }
-            catch (Exception e) { MessageBox.Show(e.Message); return null; }
+            catch (Exception e) { MessageBox.Show(e.Message+ "MSSQL.cs 609"); return null; }
         }
 
         static public List<string> GetServers()

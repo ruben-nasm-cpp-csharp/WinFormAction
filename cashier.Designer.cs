@@ -40,14 +40,16 @@ namespace WinFormAction
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label_barcode_now = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_byers)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView_byers
             // 
             this.dataGridView_byers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_byers.Location = new System.Drawing.Point(12, 30);
+            this.dataGridView_byers.Location = new System.Drawing.Point(12, 283);
             this.dataGridView_byers.MultiSelect = false;
             this.dataGridView_byers.Name = "dataGridView_byers";
             this.dataGridView_byers.ReadOnly = true;
@@ -61,7 +63,7 @@ namespace WinFormAction
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 9);
+            this.label1.Location = new System.Drawing.Point(6, 257);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 15);
             this.label1.TabIndex = 1;
@@ -72,7 +74,7 @@ namespace WinFormAction
             this.comboBox_search.Cursor = System.Windows.Forms.Cursors.Default;
             this.comboBox_search.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_search.FormattingEnabled = true;
-            this.comboBox_search.Location = new System.Drawing.Point(81, 6);
+            this.comboBox_search.Location = new System.Drawing.Point(74, 254);
             this.comboBox_search.Name = "comboBox_search";
             this.comboBox_search.Size = new System.Drawing.Size(121, 23);
             this.comboBox_search.TabIndex = 1;
@@ -80,7 +82,7 @@ namespace WinFormAction
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(209, 9);
+            this.label2.Location = new System.Drawing.Point(202, 257);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 15);
             this.label2.TabIndex = 3;
@@ -88,7 +90,7 @@ namespace WinFormAction
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(285, 5);
+            this.textBox1.Location = new System.Drawing.Point(278, 253);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(236, 23);
             this.textBox1.TabIndex = 2;
@@ -101,7 +103,7 @@ namespace WinFormAction
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.label_barcode_now);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(18, 344);
+            this.groupBox1.Location = new System.Drawing.Point(12, 597);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(503, 137);
             this.groupBox1.TabIndex = 5;
@@ -153,11 +155,20 @@ namespace WinFormAction
             this.label3.TabIndex = 0;
             this.label3.Text = "У выбранного клиента сейчас штрихкодов: ";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(7, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(671, 235);
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
             // cashier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(690, 493);
+            this.ClientSize = new System.Drawing.Size(690, 746);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
@@ -171,6 +182,7 @@ namespace WinFormAction
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_byers)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,5 +202,6 @@ namespace WinFormAction
         private System.Windows.Forms.Label label_barcode_now;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox_search;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
